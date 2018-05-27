@@ -1,3 +1,9 @@
-public class Airline
+class Airline
 {
+    Airline()
+    {
+
+    }
+
+    private getName()
 }
