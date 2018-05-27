@@ -1,27 +1,46 @@
 package airTravel;
+import travel.*;
 
-class Airline implements travel.Hub
+class Airline extends Company
 {
-    private String name;
-
     Airline(String name) throws IllegalArgumentException
     {
-        String temp = name.toUpperCase();
-        if (temp.length() == 3)
-        {
-            char[] chars = temp.toCharArray();
-            for (char c : chars)
-                if (!Character.isLetter(c))
-                	throw new IllegalArgumentException();
-
-            this.name = name;
-        }
-        else
-            throw new IllegalArgumentException();
-
+        super(validateName(name));
     }
 
-    private getName() {
-    	
+    private static String validateName(String name)
+    {
+        String nameUpper = name.toUpperCase();
+        if (nameUpper.length() == 3)
+        {
+            char[] chars = nameUpper.toCharArray();
+            for (char c : chars)
+            {
+                if (!Character.isLetter(c))
+                {
+                    throw new IllegalArgumentException();
+                }
+            }
+            return nameUpper;
+        }
+        else
+        {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    public void display()
+    {
+        System.out.println("I am airline: " + super.getName());
+    }
+
+    public String[] getFlight(String orig, String dest)
+    {
+        return new String[0];
+    }
+
+    public boolean addFlight(String a, int i, int j, int k, SeatClass asdf)
+    {
+        return true;
     }
 }
