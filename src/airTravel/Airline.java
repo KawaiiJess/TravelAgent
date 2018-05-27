@@ -11,7 +11,7 @@ class Airline extends Company
     private static String validateName(String name)
     {
         String nameUpper = name.toUpperCase();
-        if (nameUpper.length() < 7)
+        if (nameUpper.length() < 7 && nameUpper.length() > 0)
         {
             char[] chars = nameUpper.toCharArray();
             for (char c : chars)
@@ -29,18 +29,25 @@ class Airline extends Company
         }
     }
 
-    public void display()
+    protected void display()
     {
         System.out.println("I am airline: " + super.getName());
     }
-
-    public String[] getFlight(String orig, String dest)
+    
+    String[] getFlight(String orig, String dest)
     {
-        return new String[0];
+        return super.getTrips(orig, dest);
     }
 
-    public boolean addFlight(String a, int i, int j, int k, SeatClass asdf)
+    boolean addFlight(String name, String source, String dest, int year, int month, int day, SeatClass seatClass)
     {
-        return true;
+    	try {
+    		Trip t = new Flight(name, source, dest, year, month, day, seatClass);
+    		super.addTrip(t);
+    	}catch(Exception e) {
+    		return false;
+    	}
+    	
+    	return true;
     }
 }
