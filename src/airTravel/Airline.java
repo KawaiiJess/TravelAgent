@@ -11,12 +11,12 @@ class Airline extends Company
     private static String validateName(String name)
     {
         String nameUpper = name.toUpperCase();
-        if (nameUpper.length() == 3)
+        if (nameUpper.length() < 7)
         {
             char[] chars = nameUpper.toCharArray();
             for (char c : chars)
             {
-                if (!Character.isLetter(c))
+                if (!Character.isLetterOrDigit(c))
                 {
                     throw new IllegalArgumentException();
                 }

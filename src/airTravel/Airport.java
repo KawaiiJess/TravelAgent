@@ -7,6 +7,32 @@ public class Airport implements Hub
 
     Airport()
     {
+        String nameUpper = name.toUpperCase();
+        if (nameUpper.length() == 3)
+        {
+            char[] chars = nameUpper.toCharArray();
+            for (char c : chars)
+            {
+                if (!Character.isLetter(c))
+                {
+                    throw new IllegalArgumentException();
+                }
+            }
+            return nameUpper;
+        }
+        else
+        {
+            throw new IllegalArgumentException();
+        }
+    }
 
+    public String getName()
+    {
+        return this.name;
+    }
+
+    public void display()
+    {
+        System.out.println("My airport code is: " + this.name);
     }
 }
