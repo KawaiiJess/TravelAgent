@@ -1,3 +1,5 @@
+package travel;
+
 public abstract class Company
 {
     private Collection<Trip> trips;

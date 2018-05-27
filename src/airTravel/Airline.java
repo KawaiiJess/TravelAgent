@@ -1,3 +1,5 @@
+package airTravel;
+
 class Airline
 {
     Airline()
