@@ -18,7 +18,7 @@ public class Airport implements Hub
                     throw new IllegalArgumentException();
                 }
             }
-            return nameUpper;
+            this.name = nameUpper;
         }
         else
         {
