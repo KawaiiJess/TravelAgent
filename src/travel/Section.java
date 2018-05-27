@@ -19,7 +19,7 @@ public abstract class Section
 		this.seatType = seatType;
 	}
 	
-	protected boolean hasAvailableSeat() 
+	protected final boolean hasAvailableSeat() 
 	{
 		for(int i = 0; i < seats.length; i++) 
 			for(int j = 0; j < seats[i].length; j++)
@@ -28,7 +28,7 @@ public abstract class Section
 		return false;
 	}
 	
-	protected boolean bookSeat() 
+	protected final boolean bookSeat() 
 	{
 		for(int i = 0; i < seats.length; i++) 
 			for(int j = 0; j < seats[i].length; j++)
@@ -36,11 +36,9 @@ public abstract class Section
 					seats[i][j].fill();
 					return true;
 				}
-			
-		
 		return false;
 	}
-	protected boolean bookSeat(int row, int col) 
+	protected final boolean bookSeat(int row, int col) 
 	{
 		if(!seats[row][col].isOccupied()) 
 		{
@@ -50,12 +48,14 @@ public abstract class Section
 		return false;
 			
 	}
-	protected String getName() 
+	protected final String getName() 
 	{
 		return this.name;
 	}
 	
-	protected SeatClass getSeatClass()
+	protected abstract void display();
+	
+	protected final SeatClass getSeatClass()
 	{
 		return this.seatType;
 	}

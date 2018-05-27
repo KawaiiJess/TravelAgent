@@ -8,26 +8,38 @@ public abstract class Company
     private Collection<Trip> trips;
     private String name;
 
-    public Company(String name)
+    protected Company(String name)
     {
     	this.name = name;
     	this.trips = new ArrayList<Trip>();
     }
 
-    public final String getName()
+    protected final String getName()
     {
         return this.name;
     }
 
-    public abstract void display();
+    protected abstract void display();
 
-
-    public final String[] getTrips(String src, String dest)
+    protected final String[] getTrips(String src, String dest)
     {
-    	return null;
+    	Collection<String> selectedTrips = new ArrayList<>();
+    	for(Trip t : this.trips) 
+    	{
+    		if(t.getSource().equals(src) && t.getDestination().equals(dest))
+    			selectedTrips.add(t.getName());
+    	}
+    	return (String[]) selectedTrips.toArray();
     }
 
-    public final boolean addTrip(String compName, String src, String dest, int year, int month, int day, String id) {
-    	return false;
+    protected final boolean addTrip(Trip t) 
+    {
+    	for(Trip h: trips)
+    	{
+    		if(t.equals(h))
+    			return false;
+    	}
+    	this.trips.add(t);
+    	return true;
     }
 }
