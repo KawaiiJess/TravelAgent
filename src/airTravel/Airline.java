@@ -9,29 +9,19 @@ class Airline implements travel.Hub
         String temp = name.toUpperCase();
         if (temp.length() == 3)
         {
-            boolean valid = true;
             char[] chars = temp.toCharArray();
             for (char c : chars)
-            {
                 if (!Character.isLetter(c))
-                {
-                    valid = false;
-                }
-                if (valid)
-                {
-                    this.name = name;
-                }
-                else
-                {
-                    throw new IllegalArgumentException();
-                }
-            }
+                	throw new IllegalArgumentException();
+
+            this.name = name;
         }
         else
-        {
             throw new IllegalArgumentException();
-        }
+
     }
 
-    private getName()
+    private getName() {
+    	
+    }
 }
