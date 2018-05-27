@@ -4,8 +4,9 @@ public abstract class Section
 {
 	private Seat[][] seats;
 	private String name;
+	private SeatClass seatType;
 	
-	protected Section(String name, int numRows, int numCols) 
+	protected Section(String name, SeatClass seatType, int numRows, int numCols) 
 	{
 		seats = new Seat[numRows][];
 		for(int i = 0; i < numRows; i++) 
@@ -15,6 +16,7 @@ public abstract class Section
 				seats[i][j] = new Seat(i,j);
 		}
 		this.name = name;
+		this.seatType = seatType;
 	}
 	
 	protected boolean hasAvailableSeat() 
@@ -51,5 +53,10 @@ public abstract class Section
 	protected String getName() 
 	{
 		return this.name;
+	}
+	
+	protected SeatClass getSeatClass()
+	{
+		return this.seatType;
 	}
 }
