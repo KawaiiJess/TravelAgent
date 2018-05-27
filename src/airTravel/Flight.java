@@ -13,16 +13,14 @@ public class Flight implements Trip
 	private Calendar departure;
 	private String source;
 	private String dest;
-	private SeatClass seatClass; 
 	
-	public Flight(String name, String source, String dest, int yr, int mnth, int day, SeatClass seatClass) {
+	public Flight(String name, String source, String dest, int yr, int mnth, int day) {
 		this.departure = validateDate(yr,mnth,day);
 		if(this.departure == null)
 			throw new IllegalArgumentException("Bad Date given to new flight");
 		this.source = source;
 		this.dest = dest;
 		this.name = name;
-		this.seatClass = seatClass;
 	}
 	
 	private static Calendar validateDate(int yr, int mnth, int day)
