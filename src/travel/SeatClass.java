@@ -1,6 +1,6 @@
 package travel;
 
-enum SeatClass
+public enum SeatClass
 {
 	first,economy,business;
 }
