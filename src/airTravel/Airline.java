@@ -42,7 +42,7 @@ class Airline extends Company
     boolean addFlight(String name, String source, String dest, int year, int month, int day, SeatClass seatClass)
     {
     	try {
-    		Trip t = new Flight(name, source, dest, year, month, day, seatClass);
+    		Trip t = new Flight(name, source, dest, year, month, day);
     		super.addTrip(t);
     	}catch(Exception e) {
     		return false;
