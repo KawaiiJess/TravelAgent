@@ -44,7 +44,7 @@ public class SystemManager
         if (airlines.containsKey(aname))
         {
             Airline temp = airlines.get(aname);
-            temp.addFlight(aname, orig, dest, year, month, day, id);
+            temp.addFlight(id, orig, dest, year, month, day);
         }
         else
         {
@@ -59,7 +59,25 @@ public class SystemManager
 
     public void findAvailableFlights(String orig, String dest)
     {
-        //We're going to use an iterator to print directly to terminal.
+    	if(orig == null || dest == null)
+    	{
+    		System.out.println("Unknown origin/dest");
+    		return;
+    	}
+    		
+    	
+        for(String airLiner : airlines.keySet()) 
+        {
+        	boolean haveFlight = false;
+        	System.out.printf("Flights from %s to %s\n",orig,dest);
+        	for(String flight : airlines.get(airLiner).getFlight(orig, dest))
+        	{
+        		haveFlight = true;
+        		System.out.println("\t" + flight);
+        	}
+        	if(!haveFlight)
+        		System.out.println("\tNo Flights Found");
+        }
     }
 
     public void bookSeat(String air, String fl, SeatClass s, int row, char col)
