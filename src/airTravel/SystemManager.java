@@ -28,6 +28,7 @@ public class SystemManager
                 if (!airports.containsKey(name))
                 {
                     airports.put(name, new Airport(name));
+                    System.out.println("Added airport " + name);
                 }
                 else
                 {
@@ -54,6 +55,7 @@ public class SystemManager
                 if (!airlines.containsKey(name))
                 {
                     airlines.put(name, new Airline(name));
+                    System.out.println("Added airline " + name);
                 }
                 else
                 {
@@ -72,10 +74,11 @@ public class SystemManager
         if (airlines.containsKey(aname))
         {
             Airline temp = airlines.get(aname);
-            if (!temp.addFlight(id, orig, dest, year, month, day))
-            {
+            if (temp.addFlight(id, orig, dest, year, month, day))
+            	System.out.println("Added flight " + id + " to airline " + aname);
+            else
                 System.out.println("Could not add flight!");
-            }
+            
         }
         else
         {
@@ -94,10 +97,11 @@ public class SystemManager
             if (airlines.containsKey(air))
             {
                 Airline temp = airlines.get(air);
-                if (!temp.createFlightSection(flID, s, rows, cols))
-                {
+                if (temp.createFlightSection(flID, s, rows, cols))
+                	System.out.println("Added section to flight " + flID);
+                else
                     System.out.println("Could not add flight section!");
-                }
+                
             }
             else
             {
@@ -141,10 +145,11 @@ public class SystemManager
             if (airlines.containsKey(air))
             {
                 Airline temp = airlines.get(air);
-                if (!temp.bookSeat(fl, s, row, col))
-                {
+                if (temp.bookSeat(fl, s, row, col))
+                	System.out.println("Booked seat " + row + col + " of flight " + fl);
+                else
                     System.out.println("Could not book seat!");
-                }
+                
             }
             else
             {
