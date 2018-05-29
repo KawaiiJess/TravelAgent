@@ -21,7 +21,7 @@ public class SampleClient
         res.createFlight("DEL", "DEN", "LON", 2018, 9, 8, "567"); //invalid airline
         res.createFlight("DELTA", "LON33", "DEN33", 2019, 5, 7, "123");//invalid airports
         res.createFlight("AMER", "DEN", "LON", 2010, 40, 100, "123abc");//invalid date
-        res.createSection("DELTA", "123", 2, 2, SeatClass.economy);
+/*        res.createSection("DELTA", "123", 2, 2, SeatClass.economy);
         res.createSection("DELTA", "123", 2, 3, SeatClass.first);
         res.createSection("DELTA", "123", 2, 3, SeatClass.first);//Invalid
         res.createSection("SWSERTT", "123", 5, 5, SeatClass.economy);//Invalid airline
@@ -31,7 +31,7 @@ public class SampleClient
         res.bookSeat("DELTA888", "123", SeatClass.business, 1, 'A'); //Invalid airline
         res.bookSeat("DELTA", "123haha7", SeatClass.business, 1, 'A'); //Invalid flightId
         res.bookSeat("DELTA", "123", SeatClass.economy, 1, 'A'); //already booked
-        res.displaySystemDetails();
+        res.displaySystemDetails();*/
         res.findAvailableFlights("DEN", "LON");
     }
 }

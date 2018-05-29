@@ -5,7 +5,7 @@ public class Airport implements Hub
 {
     private String name;
 
-    Airport()
+    Airport(String name) throws IllegalArgumentException
     {
         String nameUpper = name.toUpperCase();
         if (nameUpper.length() == 3)

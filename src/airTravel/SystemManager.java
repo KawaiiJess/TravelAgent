@@ -1,9 +1,5 @@
 package airTravel;
-
-import airTravel.Airline;
-import airTravel.Airport;
 import travel.SeatClass;
-
 import java.util.*;
 
 public class SystemManager
@@ -13,29 +9,45 @@ public class SystemManager
 
     public SystemManager()
     {
+        airports = new HashMap<>(100);
+        airlines = new HashMap<>(100);
     }
 
     public void createAirport(String name)
     {
-        if (!airports.containsKey(name))
+        try
         {
-            airports.put(name, new Airport());
+            if (!airports.containsKey(name))
+            {
+                airports.put(name, new Airport(name));
+            }
+            else
+            {
+                System.out.println("That airport already exists!");
+            }
         }
-        else
+        catch(IllegalArgumentException e)
         {
-            System.out.println("That airport already exists!");
+            System.out.println("There was an error creating that airport: " + e.getMessage());
         }
     }
 
     public void createAirline(String name)
     {
-        if (!airlines.containsKey(name))
+        try
         {
-            airlines.put(name, new Airline(name));
+            if (!airlines.containsKey(name))
+            {
+                airlines.put(name, new Airline(name));
+            }
+            else
+            {
+                System.out.println("That airport already exists!");
+            }
         }
-        else
+        catch (IllegalArgumentException e)
         {
-            System.out.println("That airport already exists!");
+            System.out.println("There was an error creating that airline: " + e.getMessage());
         }
     }
 
