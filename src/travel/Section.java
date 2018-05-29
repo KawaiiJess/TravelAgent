@@ -43,6 +43,8 @@ public abstract class Section
 	}
 	protected final boolean bookSeat(int row, int col) 
 	{
+		if(row < 0 || row >= seats.length || col < 0 || col >= seats[row].length)
+			return false;
 		if(!seats[row][col].isOccupied()) 
 		{
 			seats[row][col].fill();
