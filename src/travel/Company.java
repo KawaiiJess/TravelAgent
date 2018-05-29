@@ -1,7 +1,6 @@
 package travel;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collection;
 
 public abstract class Company
@@ -22,9 +21,14 @@ public abstract class Company
 
     protected void display() 
     {
-    	for(Trip t: trips) 
+    	if(trips.isEmpty()) 
+    		System.out.println("\tEmpty");
+    	else 
     	{
-    		t.display();
+	    	for(Trip t: trips) 
+	    	{
+	    		t.display();
+	    	}
     	}
     }
 

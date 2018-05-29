@@ -112,19 +112,18 @@ public class SystemManager
     		return;
     	}
 
-
+    	System.out.printf("Flights from %s to %s\n",orig,dest);
+    	boolean haveFlight = false;
         for(String airLiner : airlines.keySet())
         {
-        	boolean haveFlight = false;
-        	System.out.printf("Flights from %s to %s\n",orig,dest);
         	for(String flight : airlines.get(airLiner).getFlight(orig, dest))
         	{
         		haveFlight = true;
         		System.out.println("\t" + flight);
         	}
-        	if(!haveFlight)
-        		System.out.println("\tNo Flights Found");
         }
+        if(!haveFlight)
+    		System.out.println("\tNo Flights Found");
     }
 
     public void bookSeat(String air, String fl, SeatClass s, int row, char col)
