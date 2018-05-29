@@ -63,7 +63,7 @@ public abstract class Trip
 	
 	protected void display() {
 		String date =  departure.get(Calendar.MONTH) + "/" + departure.get(Calendar.DAY_OF_MONTH) + "/" + departure.get(Calendar.YEAR);
-		System.out.printf("\tID: %s Srouce: %s Destination: %s Departure: %s\n", name, source, dest,date);
+		System.out.printf(" ID: %-8s Source: %-5s Destination: %-5s Departure: %-10s\n", name, source, dest,date);
 	}
 	
 	public final String getSource()

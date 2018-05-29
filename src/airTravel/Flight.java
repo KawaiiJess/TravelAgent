@@ -28,7 +28,7 @@ public class Flight extends Trip
 
 	@Override
 	public void display() {
-		System.out.print("\tFlight=");
+		System.out.print("\tFlight =");
 		super.display();
 	}
 }
