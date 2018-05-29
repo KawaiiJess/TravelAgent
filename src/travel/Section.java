@@ -72,6 +72,8 @@ public abstract class Section
 
     protected final void display()
     {
+        String seat = "\t\t" + seatType.toString();
+        System.out.printf("%-15s", seat);
         System.out.print("[");
         for (int i = 0; i < seats.length; i++)
         {
