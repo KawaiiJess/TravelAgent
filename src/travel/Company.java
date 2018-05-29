@@ -41,6 +41,21 @@ public abstract class Company
     	
     }
     
+    protected final boolean addSection(String trip, Section s) 
+    {
+    	if(trip == null || s == null)
+    		return false;
+    	Trip t = null;
+    	for(Trip st: trips)
+    	{
+    		if(st.getName().equals(trip))
+    			t = st;
+    	}
+    	if(t == null)
+    		return false;
+    	return t.addSection(s);
+    }
+    
     protected final boolean addTrip(Trip t) 
     {
     	for(Trip h: trips)

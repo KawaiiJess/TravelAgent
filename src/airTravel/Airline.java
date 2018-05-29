@@ -29,6 +29,20 @@ class Airline extends Company
         }
     }
 
+    boolean createFlightSection(String flight, SeatClass seatClass, int rows, int cols) {
+		Section s;
+		try 
+		{
+			s = new FlightSection(seatClass, rows,cols);
+		}
+		catch(IllegalArgumentException e)
+		{
+			return false;
+		}
+		
+		return super.addSection(flight, s);
+	}
+    
     protected void display()
     {
         System.out.println("I am airline: " + super.getName());
