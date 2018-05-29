@@ -50,7 +50,7 @@ class Airline extends Company
 
     protected void display()
     {
-        System.out.println("Airline: " + super.getName() + " \n\tFlights: ");
+        System.out.println("Airline: " + super.getName());
         super.display();
     }
 
