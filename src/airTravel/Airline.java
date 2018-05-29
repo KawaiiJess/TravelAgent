@@ -39,7 +39,7 @@ class Airline extends Company
         return super.getTrips(orig, dest);
     }
 
-    boolean addFlight(String name, String source, String dest, int year, int month, int day, SeatClass seatClass)
+    boolean addFlight(String name, String source, String dest, int year, int month, int day)
     {
     	try {
     		Trip t = new Flight(name, source, dest, year, month, day);

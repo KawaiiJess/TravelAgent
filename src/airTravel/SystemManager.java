@@ -44,7 +44,10 @@ public class SystemManager
         if (airlines.containsKey(aname))
         {
             Airline temp = airlines.get(aname);
-            temp.addFlight(aname, orig, dest, year, month, day, id);
+            if (!temp.addFlight(id, orig, dest, year, month, day))
+            {
+                System.out.println("Could not add flight!");
+            }
         }
         else
         {
