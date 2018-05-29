@@ -2,6 +2,7 @@ package airTravel;
 
 import airTravel.Airline;
 import airTravel.Airport;
+import travel.SeatClass;
 
 import java.util.*;
 
@@ -10,7 +11,7 @@ public class SystemManager
     private HashMap<String, Airport> airports;
     private HashMap<String, Airline> airlines;
 
-    SystemManager()
+    public SystemManager()
     {
 
     }
