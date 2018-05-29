@@ -28,7 +28,7 @@ public class Flight extends Trip
 
 	@Override
 	public void display() {
-		// TODO Auto-generated method stub
-		
+		System.out.print("Flight=");
+		super.display();
 	}
 }

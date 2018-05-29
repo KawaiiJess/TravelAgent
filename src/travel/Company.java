@@ -1,6 +1,7 @@
 package travel;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 
 public abstract class Company
@@ -19,7 +20,15 @@ public abstract class Company
         return this.name;
     }
 
-    protected abstract void display();
+    protected void display() 
+    {
+    	for(Trip t: trips) 
+    	{
+    		Calendar dept = t.getDeparture();
+    		String date =  dept.get(Calendar.MONTH) + "/" + dept.get(Calendar.DAY_OF_MONTH) + "/" + dept.get(Calendar.YEAR);
+    		System.out.printf("\tID: %s Srouce: %s Destination: %s Departure: %s\n", t.getName(), t.getSource(), t.getDestination(),date);
+    	}
+    }
 
     protected final String[] getTrips(String src, String dest)
     {
