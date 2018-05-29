@@ -47,7 +47,8 @@ class Airline extends Company
 
     protected void display()
     {
-        System.out.println("I am airline: " + super.getName());
+        System.out.println("Airline: " + super.getName() + " All Flights: ");
+        super.display();
     }
 
     String[] getFlight(String orig, String dest)

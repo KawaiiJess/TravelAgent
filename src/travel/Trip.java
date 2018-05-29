@@ -61,7 +61,10 @@ public abstract class Trip
 		return this.sections;
 	}
 	
-	public abstract void display();
+	protected void display() {
+		String date =  departure.get(Calendar.MONTH) + "/" + departure.get(Calendar.DAY_OF_MONTH) + "/" + departure.get(Calendar.YEAR);
+		System.out.printf("\tID: %s Srouce: %s Destination: %s Departure: %s\n", name, source, dest,date);
+	}
 	
 	public final String getSource()
 	{
