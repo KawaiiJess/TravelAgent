@@ -64,7 +64,7 @@ public class SystemManager
             }
             catch (IllegalArgumentException e)
             {
-                System.out.println("Airline names must be inclusively between 1 and 6 alphanumeric characters!");
+                System.out.println("Airline names must inclusively be between 1 and 6 alphanumeric characters!");
             }
         }
     }
