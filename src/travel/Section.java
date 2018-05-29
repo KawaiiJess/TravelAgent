@@ -72,7 +72,22 @@ public abstract class Section
 
     protected void display()
     {
-
+        System.out.print("[");
+        for (int i = 0; i < seats.length; i++)
+        {
+            for (int j = 0; j < seats[i].length; j++)
+            {
+                if ((i == seats.length - 1) && (j == seats[i].length - 1))
+                {
+                    System.out.println(seats[i][j].getName());
+                }
+                else if (seats[i][j].isOccupied())
+                {
+                    System.out.println(seats[i][j].getName() + ", ");
+                }
+            }
+        }
+        System.out.println("]");
     }
 
     protected final SeatClass getSeatClass()
