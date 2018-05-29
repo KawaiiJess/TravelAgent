@@ -79,7 +79,7 @@ public abstract class Section
             {
                 if ((i == seats.length - 1) && (j == seats[i].length - 1))
                 {
-                    System.out.println(seats[i][j].getName());
+                    System.out.println(seats[i][j].getName() + "]");
                 }
                 else if (seats[i][j].isOccupied())
                 {
@@ -87,7 +87,6 @@ public abstract class Section
                 }
             }
         }
-        System.out.println("]");
     }
 
     protected final SeatClass getSeatClass()
