@@ -13,22 +13,43 @@ public class SystemManager
 
     public SystemManager()
     {
-
     }
 
     public void createAirport(String name)
     {
-
+        if (!airports.containsKey(name))
+        {
+            airports.put(name, new Airport());
+        }
+        else
+        {
+            System.out.println("That airport already exists!");
+        }
     }
 
     public void createAirline(String name)
     {
-
+        if (!airlines.containsKey(name))
+        {
+            airlines.put(name, new Airline(name));
+        }
+        else
+        {
+            System.out.println("That airport already exists!");
+        }
     }
 
     public void createFlight(String aname, String orig, String dest, int year, int month, int day, String id)
     {
-
+        if (airlines.containsKey(aname))
+        {
+            Airline temp = airlines.get(aname);
+            temp.addFlight(aname, orig, dest, year, month, day, id);
+        }
+        else
+        {
+            System.out.println("That airline doesn't exist!");
+        }
     }
 
     public void createSection(String air, String flID, int rows, int cols, SeatClass s)
