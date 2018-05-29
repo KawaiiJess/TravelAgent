@@ -29,9 +29,18 @@ public abstract class Company
     		if(t.getSource().equals(src) && t.getDestination().equals(dest))
     			selectedTrips.add(t.getName());
     	}
-    	return (String[]) selectedTrips.toArray();
+    	return castObjectToStringArray(selectedTrips.toArray());
     }
 
+    private String[] castObjectToStringArray(Object[] ara) 
+    {
+    	String[] s = new String[ara.length];
+    	for(int i = 0; i < ara.length; i++) 
+    		s[i] = (String) ara[i];
+    	return s;
+    	
+    }
+    
     protected final boolean addTrip(Trip t) 
     {
     	for(Trip h: trips)
