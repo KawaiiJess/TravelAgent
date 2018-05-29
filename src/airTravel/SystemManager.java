@@ -34,7 +34,7 @@ public class SystemManager
             }
             catch(IllegalArgumentException e)
             {
-                System.out.println("There was an error creating that airport: " + e.getMessage());
+                System.out.println("Airport names must be exactly 3 alphanumeric characters!");
             }
         }
     }
@@ -60,7 +60,7 @@ public class SystemManager
             }
             catch (IllegalArgumentException e)
             {
-                System.out.println("There was an error creating that airline: " + e.getMessage());
+                System.out.println("Airline names must be inclusively between 1 and 6 alphanumeric characters!");
             }
         }
     }
@@ -83,7 +83,25 @@ public class SystemManager
 
     public void createSection(String air, String flID, int rows, int cols, SeatClass s)
     {
-
+        if (s == null)
+        {
+            System.out.println("Null is not a valid seat class!");
+        }
+        else
+        {
+            if (airlines.containsKey(air))
+            {
+                Airline temp = airlines.get(air);
+                if (!temp.createFlightSection(flID, s, rows, cols))
+                {
+                    System.out.println("Could not add flight section!");
+                }
+            }
+            else
+            {
+                System.out.println("That airline doesn't exist!");
+            }
+        }
     }
 
     public void findAvailableFlights(String orig, String dest)
