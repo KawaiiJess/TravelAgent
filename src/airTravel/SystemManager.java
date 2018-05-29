@@ -106,7 +106,7 @@ public class SystemManager
 
     public void findAvailableFlights(String orig, String dest)
     {
-    	if(orig == null || dest == null)
+    	if(orig == null || dest == null || !airports.containsKey(orig) || !airports.containsKey(dest))
     	{
     		System.out.println("Unknown origin/dest");
     		return;
