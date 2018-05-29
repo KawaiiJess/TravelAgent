@@ -21,8 +21,4 @@ public class FlightSection extends Section
         return super.bookSeat(c, i);
     }
 
-    protected void display()
-    {
-        System.out.println("My flight ID is:");
-    }
 }

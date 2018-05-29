@@ -70,7 +70,7 @@ public abstract class Section
 
     }
 
-    protected void display()
+    protected final void display()
     {
         System.out.print("[");
         for (int i = 0; i < seats.length; i++)
@@ -83,7 +83,7 @@ public abstract class Section
                 }
                 else if (seats[i][j].isOccupied())
                 {
-                    System.out.println(seats[i][j].getName() + ", ");
+                    System.out.print(seats[i][j].getName() + ", ");
                 }
             }
         }
