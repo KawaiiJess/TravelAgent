@@ -1,50 +1,29 @@
 package airTravel;
 
-
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-
 import travel.SeatClass;
+import travel.Section;
 import travel.Trip;
 
-public class Flight implements Trip
-{
-	private String name;
-	private Calendar departure;
-	private String source;
-	private String dest;
-	
-	public Flight(String name, String source, String dest, int yr, int mnth, int day) {
-		this.departure = validateDate(yr,mnth,day);
-		if(this.departure == null)
-			throw new IllegalArgumentException("Bad Date given to new flight");
-		this.source = source;
-		this.dest = dest;
-		this.name = name;
-	}
-	
-	private static Calendar validateDate(int yr, int mnth, int day)
+public class Flight extends Trip
+{	
+	Flight(String name, String source, String dest, int yr, int mnth, int day) 
 	{
-		Calendar d;
-		try {
-			d = new GregorianCalendar(yr,mnth,day);
-		}catch(Exception e) {
-			return null;
+		super(name, source, dest, yr, mnth, day);
+	}
+
+	
+	boolean createSection(SeatClass seatClass, int rows, int cols) {
+		Section s;
+		try 
+		{
+			s = new FlightSection(seatClass, rows,cols);
 		}
-		Calendar temp = new GregorianCalendar();
-		temp.add(Calendar.YEAR, 1);
-		if(d.after(temp))
-			return null;
-		temp.add(Calendar.YEAR, -7);
-		if(d.before(temp))
-			return null;
+		catch(IllegalArgumentException e)
+		{
+			return false;
+		}
 		
-		return d;
-	}
-	
-	public String getName() 
-	{
-		return this.name;
+		return super.addSection(s);
 	}
 	
 	public boolean equals(Object o) 
@@ -56,8 +35,8 @@ public class Flight implements Trip
 		if(o instanceof Flight) 
 		{
 			Flight that = (Flight)o;
-			return (that.departure.equals(this.departure) &&
-					that.name.equals(this.name) &&
+			return (that.getDeparture().equals(this.getDeparture()) &&
+					that.getName().equals(this.getName()) &&
 					that.getSource().equals(this.getSource()) &&
 					that.getDestination().equals(this.getDestination()));
 		}
@@ -68,19 +47,5 @@ public class Flight implements Trip
 	public void display() {
 		// TODO Auto-generated method stub
 		
-	}
-
-	@Override
-	public String getSource() {
-		return this.source;
-	}
-
-	@Override
-	public String getDestination() {
-		return this.dest;
-	}
-
-	public SeatClass getSeatClass() {
-		return seatClass;
 	}
 }

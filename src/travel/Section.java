@@ -3,11 +3,15 @@ package travel;
 public abstract class Section 
 {
 	private Seat[][] seats;
-	private String name;
 	private SeatClass seatType;
 	
-	protected Section(String name, SeatClass seatType, int numRows, int numCols) 
+	protected Section(SeatClass seatType, int numRows, int numCols) 
 	{
+		if(seatType == null || numRows <= 0 || numCols <= 0) 
+		{
+			throw new IllegalArgumentException("Bad name, class, numRows, or numCols passed to new Section()");
+		}
+		
 		seats = new Seat[numRows][];
 		for(int i = 0; i < numRows; i++) 
 		{
@@ -15,7 +19,6 @@ public abstract class Section
 			for(int j = 0; j < numCols; j++) 
 				seats[i][j] = new Seat(i,j);
 		}
-		this.name = name;
 		this.seatType = seatType;
 	}
 	
@@ -47,10 +50,6 @@ public abstract class Section
 		}
 		return false;
 			
-	}
-	protected final String getName() 
-	{
-		return this.name;
 	}
 	
 	protected abstract void display();
