@@ -24,9 +24,7 @@ public abstract class Company
     {
     	for(Trip t: trips) 
     	{
-    		Calendar dept = t.getDeparture();
-    		String date =  dept.get(Calendar.MONTH) + "/" + dept.get(Calendar.DAY_OF_MONTH) + "/" + dept.get(Calendar.YEAR);
-    		System.out.printf("\tID: %s Srouce: %s Destination: %s Departure: %s\n", t.getName(), t.getSource(), t.getDestination(),date);
+    		t.display();
     	}
     }
 

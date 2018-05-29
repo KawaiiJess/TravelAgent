@@ -129,11 +129,14 @@ public class SystemManager
 
     public void bookSeat(String air, String fl, SeatClass s, int row, char col)
     {
-
+    	
     }
 
     public void displaySystemDetails()
     {
-
+    	for(String airLiner : airlines.keySet())
+        {
+    		airlines.get(airLiner).display();
+        }
     }
 }
