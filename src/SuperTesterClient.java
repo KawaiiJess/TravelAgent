@@ -44,7 +44,7 @@ public class SuperTesterClient
         res.createSection("DELTA", "123", 80, 20, SeatClass.business); 	//too many columns
 
         
-/*        res.bookSeat("DELTA", "123", SeatClass.first, 1, 'A');
+        res.bookSeat("DELTA", "123", SeatClass.first, 1, 'A');
         res.bookSeat("DELTA", "123", SeatClass.economy, 1, 'A');
         res.bookSeat("DELTA", "123", SeatClass.economy, 1, 'B');
         res.bookSeat("DELTA888", "123", SeatClass.business, 1, 'A'); //Invalid airline
@@ -53,7 +53,7 @@ public class SuperTesterClient
         res.bookSeat(null, "123", SeatClass.first, 1, 'A');
         res.bookSeat("DELTA", null, SeatClass.first, 1, 'A');
         res.bookSeat("DELTA", "123", null, 1, 'A');
-        res.bookSeat("DELTA", "123", SeatClass.first, 2, 'Q');*/
+        res.bookSeat("DELTA", "123", SeatClass.first, 2, 'Q');
         
         res.displaySystemDetails();
         res.findAvailableFlights("DEN", "LON");

@@ -128,7 +128,25 @@ public class SystemManager
 
     public void bookSeat(String air, String fl, SeatClass s, int row, char col)
     {
-    	
+        if (row == 0 || col == 0)
+        {
+            System.out.println("Null is not a valid seat position!");
+        }
+        else
+        {
+            if (airlines.containsKey(air))
+            {
+                Airline temp = airlines.get(air);
+                if (!temp.bookSeat(fl, s, row, col))
+                {
+                    System.out.println("Could not book seat!");
+                }
+            }
+            else
+            {
+                System.out.println("That airline doesn't exist!");
+            }
+        }
     }
 
     public void displaySystemDetails()

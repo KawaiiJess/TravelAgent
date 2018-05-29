@@ -78,4 +78,19 @@ class Airline extends Company
             return true;
         }
     }
+
+    boolean bookSeat(String fID, SeatClass s, int row, char col)
+    {
+        char colUpper = Character.toUpperCase(col);
+        int colInt = ((int)colUpper)-65;
+        if (colInt < 0 || colInt > 9)
+        {
+            System.out.println("Seat index out of range.");
+            return false;
+        }
+        else
+        {
+            return super.bookSeat(fID, s, row, colInt);
+        }
+    }
 }
