@@ -35,13 +35,13 @@ public class SuperTesterClient
         
         
         res.createSection("DELTA", "123", 2, 2, SeatClass.economy);
-//        res.createSection("DELTA", "123", 2, 3, SeatClass.first);
-//        res.createSection("DELTA", "123", 2, 3, SeatClass.first);//Invalid
-//        res.createSection("SWSERTT", "123", 5, 5, SeatClass.economy);//Invalid airline
-//        res.createSection("DELTA", "123", 2, 2,null);				   	//null class
-//        res.createSection("DELTA", "123", 0, 0, SeatClass.business);   	//no seats
-//        res.createSection("DELTA", "123", 101, 8, SeatClass.business); 	//too many rows
-//        res.createSection("DELTA", "123", 80, 20, SeatClass.business); 	//too many columns
+        res.createSection("DELTA", "123", 2, 3, SeatClass.first);
+        res.createSection("DELTA", "123", 2, 3, SeatClass.first);//Invalid
+        res.createSection("SWSERTT", "123", 5, 5, SeatClass.economy);//Invalid airline
+        res.createSection("DELTA", "123", 2, 2,null);				   	//null class
+        res.createSection("DELTA", "123", 0, 0, SeatClass.business);   	//no seats
+        res.createSection("DELTA", "123", 101, 8, SeatClass.business); 	//too many rows
+        res.createSection("DELTA", "123", 80, 20, SeatClass.business); 	//too many columns
 
         
 /*        res.bookSeat("DELTA", "123", SeatClass.first, 1, 'A');

@@ -58,16 +58,24 @@ class Airline extends Company
 
     boolean addFlight(String name, String source, String dest, int year, int month, int day)
     {
-        try
+        if (name == null)
         {
-            Trip t = new Flight(name, source, dest, year, month, day);
-            super.addTrip(t);
-        }
-        catch (Exception e)
-        {
+            System.out.println("Null is not a valid flight ID!");
             return false;
         }
+        else
+        {
+            try
+            {
+                Trip t = new Flight(name, source, dest, year, month, day);
+                super.addTrip(t);
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
 
-        return true;
+            return true;
+        }
     }
 }
