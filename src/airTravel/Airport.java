@@ -1,5 +1,6 @@
 package airTravel;
-import travel.*;
+
+import travel.Hub;
 
 public class Airport implements Hub
 {

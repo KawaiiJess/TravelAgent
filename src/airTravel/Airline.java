@@ -1,6 +1,9 @@
 package airTravel;
 
-import travel.*;
+import travel.Company;
+import travel.SeatClass;
+import travel.Section;
+import travel.Trip;
 
 class Airline extends Company
 {
@@ -82,7 +85,7 @@ class Airline extends Company
     boolean bookSeat(String fID, SeatClass s, int row, char col)
     {
         char colUpper = Character.toUpperCase(col);
-        int colInt = ((int)colUpper)-65;
+        int colInt = ((int) colUpper) - 65;
         if (colInt < 0 || colInt > 9)
         {
             System.out.println("Seat index out of range.");

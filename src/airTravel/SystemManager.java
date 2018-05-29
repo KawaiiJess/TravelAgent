@@ -1,6 +1,8 @@
 package airTravel;
+
 import travel.SeatClass;
-import java.util.*;
+
+import java.util.HashMap;
 
 public class SystemManager
 {
@@ -32,7 +34,7 @@ public class SystemManager
                     System.out.println("That airport already exists!");
                 }
             }
-            catch(IllegalArgumentException e)
+            catch (IllegalArgumentException e)
             {
                 System.out.println("Airport names must be exactly 3 alphanumeric characters!");
             }
@@ -106,24 +108,26 @@ public class SystemManager
 
     public void findAvailableFlights(String orig, String dest)
     {
-    	if(orig == null || dest == null || !airports.containsKey(orig) || !airports.containsKey(dest))
-    	{
-    		System.out.println("Unknown origin/dest");
-    		return;
-    	}
-
-    	System.out.printf("Flights from %s to %s\n",orig,dest);
-    	boolean haveFlight = false;
-        for(String airLiner : airlines.keySet())
+        if (orig == null || dest == null || !airports.containsKey(orig) || !airports.containsKey(dest))
         {
-        	for(String flight : airlines.get(airLiner).getFlight(orig, dest))
-        	{
-        		haveFlight = true;
-        		System.out.println("\t" + flight);
-        	}
+            System.out.println("Unknown origin/dest");
+            return;
         }
-        if(!haveFlight)
-    		System.out.println("\tNo Flights Found");
+
+        System.out.printf("Flights from %s to %s\n", orig, dest);
+        boolean haveFlight = false;
+        for (String airLiner : airlines.keySet())
+        {
+            for (String flight : airlines.get(airLiner).getFlight(orig, dest))
+            {
+                haveFlight = true;
+                System.out.println("\t" + flight);
+            }
+        }
+        if (!haveFlight)
+        {
+            System.out.println("\tNo Flights Found");
+        }
     }
 
     public void bookSeat(String air, String fl, SeatClass s, int row, char col)
@@ -151,9 +155,9 @@ public class SystemManager
 
     public void displaySystemDetails()
     {
-    	for(String airLiner : airlines.keySet())
+        for (String airLiner : airlines.keySet())
         {
-    		airlines.get(airLiner).display();
+            airlines.get(airLiner).display();
         }
     }
 }
