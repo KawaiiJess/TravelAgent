@@ -26,12 +26,16 @@ public abstract class Company
     	else 
     	{
 	    	for(Trip t: trips) 
-	    	{
 	    		t.display();
-	    	}
     	}
     }
 
+    protected boolean bookSeat(String trip, SeatClass seat, int row, int col) {
+    	Trip t = getTripFromName(trip);
+    	if(t == null) return false;
+    	return t.bookSeat(seat,row,col);
+    }
+    
     protected final String[] getTrips(String src, String dest)
     {
     	Collection<String> selectedTrips = new ArrayList<>();
@@ -56,25 +60,24 @@ public abstract class Company
     {
     	if(trip == null || s == null)
     		return false;
-    	Trip t = null;
-    	for(Trip st: trips)
-    	{
-    		if(st.getName().equals(trip))
-    			t = st;
-    	}
-    	if(t == null)
-    		return false;
+    	Trip t = getTripFromName(trip);
+    	if(t == null) return false;
     	return t.addSection(s);
     }
     
     protected final boolean addTrip(Trip t) 
     {
-    	for(Trip h: trips)
-    	{
-    		if(t.equals(h))
-    			return false;
-    	}
+    	
     	this.trips.add(t);
     	return true;
+    }
+    
+    private Trip getTripFromName(String name) 
+    {
+    	for(Trip h: trips)
+    		if(h.getName().equals(name))
+    			return h;
+    	return null;
+    }
     }
 }
