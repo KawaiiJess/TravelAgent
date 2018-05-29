@@ -37,7 +37,7 @@ public abstract class Trip
 		temp.add(Calendar.YEAR, 1);
 		if(d.after(temp))
 			return null;
-		temp.add(Calendar.YEAR, -7);
+		temp.add(Calendar.YEAR, -1);
 		if(d.before(temp))
 			return null;
 		

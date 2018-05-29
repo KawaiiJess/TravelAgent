@@ -33,6 +33,6 @@ public class Airport implements Hub
 
     public void display()
     {
-        System.out.println("My airport code is: " + this.name);
+        System.out.println("Airport: " + this.name);
     }
 }
