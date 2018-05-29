@@ -34,7 +34,7 @@ public class SuperTesterClient
         res.createFlight("DELTA", "DEN", "LON", 2018, 10, 10, null); //null flight
         
         
-        res.createSection("DELTA", "123", 2, 2, SeatClass.economy);
+/*        res.createSection("DELTA", "123", 2, 2, SeatClass.economy);
         res.createSection("DELTA", "123", 2, 3, SeatClass.first);
         res.createSection("DELTA", "123", 2, 3, SeatClass.first);//Invalid
         res.createSection("SWSERTT", "123", 5, 5, SeatClass.economy);//Invalid airline
@@ -53,7 +53,7 @@ public class SuperTesterClient
         res.bookSeat(null, "123", SeatClass.first, 1, 'A');
         res.bookSeat("DELTA", null, SeatClass.first, 1, 'A');
         res.bookSeat("DELTA", "123", null, 1, 'A');
-        res.bookSeat("DELTA", "123", SeatClass.first, 2, 'Q');
+        res.bookSeat("DELTA", "123", SeatClass.first, 2, 'Q');*/
         
         res.displaySystemDetails();
         res.findAvailableFlights("DEN", "LON");

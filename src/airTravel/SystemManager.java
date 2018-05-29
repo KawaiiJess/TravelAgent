@@ -9,45 +9,59 @@ public class SystemManager
 
     public SystemManager()
     {
-        airports = new HashMap<>(100);
-        airlines = new HashMap<>(100);
+        airports = new HashMap<>();
+        airlines = new HashMap<>();
     }
 
     public void createAirport(String name)
     {
-        try
+        if (name == null)
         {
-            if (!airports.containsKey(name))
-            {
-                airports.put(name, new Airport(name));
-            }
-            else
-            {
-                System.out.println("That airport already exists!");
-            }
+            System.out.println("Null is not a valid airport name!");
         }
-        catch(IllegalArgumentException e)
+        else
         {
-            System.out.println("There was an error creating that airport: " + e.getMessage());
+            try
+            {
+                if (!airports.containsKey(name))
+                {
+                    airports.put(name, new Airport(name));
+                }
+                else
+                {
+                    System.out.println("That airport already exists!");
+                }
+            }
+            catch(IllegalArgumentException e)
+            {
+                System.out.println("There was an error creating that airport: " + e.getMessage());
+            }
         }
     }
 
     public void createAirline(String name)
     {
-        try
+        if (name == null)
         {
-            if (!airlines.containsKey(name))
-            {
-                airlines.put(name, new Airline(name));
-            }
-            else
-            {
-                System.out.println("That airport already exists!");
-            }
+            System.out.println("Null is not a valid airline name!");
         }
-        catch (IllegalArgumentException e)
+        else
         {
-            System.out.println("There was an error creating that airline: " + e.getMessage());
+            try
+            {
+                if (!airlines.containsKey(name))
+                {
+                    airlines.put(name, new Airline(name));
+                }
+                else
+                {
+                    System.out.println("That airport already exists!");
+                }
+            }
+            catch (IllegalArgumentException e)
+            {
+                System.out.println("There was an error creating that airline: " + e.getMessage());
+            }
         }
     }
 
