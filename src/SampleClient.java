@@ -1,3 +1,4 @@
+import airTravel.AirportFactory;
 import airTravel.SystemManager;
 import travel.SeatClass;
 
@@ -5,7 +6,8 @@ public class SampleClient
 {
     public static void main(String[] args)
     {
-        SystemManager res = new SystemManager();
+    	
+        /*SystemManager res = new SystemManager();
         res.createAirport("DEN");
         res.createAirport("DFW");
         res.createAirport("LON");
@@ -32,6 +34,12 @@ public class SampleClient
         res.bookSeat("DELTA", "123haha7", SeatClass.business, 1, 'A'); //Invalid flightId
         res.bookSeat("DELTA", "123", SeatClass.economy, 1, 'A'); //already booked
         res.displaySystemDetails();
-        res.findAvailableFlights("DEN", "LON");
+        res.findAvailableFlights("DEN", "LON");*/
+    	
+    	AirportFactory f = new AirportFactory();
+    	String test = "[DEN, NYC, SEA, LAX]{AMER[AA1|2011, 10, 8, 16, 30|DEN|LAX[E:200:S:4,F:500:S:2], AA2|2011, 8, 9, 7, 30|LAX|DEN[E:200:S:5,F:500:S:3]], UNTD[UA21|2011, 11, 8, 12, 30|NYC|SEA[E:300:S:6, F:800:S:3], UA12|2011, 8, 9, 7, 30|SEA|DEN[B:700:S:5, F:1200:S:2]]}";
+    	SystemManager testManager = f.buildAirportSystem(test);
+    	testManager.createAirport("DEN");
+    	
     }
 }
