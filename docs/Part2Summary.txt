@@ -4,7 +4,7 @@ PART 2
 https://cdn.discordapp.com/attachments/236342630554927107/455945557622652959/Screenshot_from_2018-06-11_21-04-42.png
 2. Use serialization to store airport subsystem in a file. Similar to displaySystemDetails. Must be in AMS format.
 3. Create overloaded createSection in SysMgr to handle layouts. See AMS format for details.
-	a. S = [1, ,2] - M = [1,2, ,3] - W = [1,2,3 ,4,5,6,7, ,8,9,10]
+	a. S = [1, ,2] - M = [1,2, ,3] - W = [1,2,3, ,4,5,6,7, ,8,9,10]
 	b. Don't allow booking of seats where there is an aisle.
 4. All flights between a particular orig/dest must have the same price for equivalent sections within the same airline.
 	a. All economy seats across all flights owned by Delta from Seattle to Denver are $300.
