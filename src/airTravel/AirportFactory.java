@@ -7,7 +7,7 @@ public class AirportFactory
 {
 	public SystemManager buildAirportSystem(String config)
 	{
-		config = removeWhitespace(config);
+		config = clean(config);
 		
 		
 		int start = 1;
@@ -110,12 +110,12 @@ public class AirportFactory
 		return -1;
 	}
 	
-	private String removeWhitespace(String s)
+	private String clean(String s)
 	{
 		StringBuilder temp = new StringBuilder("");
 		for(char c : s.toCharArray()) 
 		{
-			if(c != ' ') {
+			if(c != ' ' && c != '\r' && c != '\0' && c != '\n') {
 				temp.append(c);
 			}
 		}
