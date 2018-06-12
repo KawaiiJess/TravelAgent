@@ -14,9 +14,9 @@ public abstract class Trip
 
     private Collection<Section> sections;
 
-    protected Trip(String name, String source, String dest, int yr, int mnth, int day)
+    protected Trip(String name, String source, String dest, int yr, int mnth, int day, int hr, int min)
     {
-        this.departure = validateDate(yr, mnth, day);
+        this.departure = validateDate(yr, mnth, day, hr, min);
         if (this.departure == null)
         {
             throw new IllegalArgumentException("Bad Date given to new flight");
@@ -29,12 +29,12 @@ public abstract class Trip
         sections = new ArrayList<>();
     }
 
-    private static Calendar validateDate(int yr, int mnth, int day)
+    private static Calendar validateDate(int yr, int mnth, int day, int hr, int min)
     {
         Calendar d;
         try
         {
-            d = new GregorianCalendar(yr, mnth, day);
+            d = new GregorianCalendar(yr, mnth, day, hr, min);
         }
         catch (Exception e)
         {
