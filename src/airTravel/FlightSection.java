@@ -14,6 +14,11 @@ public class FlightSection extends Section
             throw new IllegalArgumentException("to many rows or cols passed to new FlightSection");
         }
     }
+    
+    FlightSection(SeatClass seatClass, int rows, char layout, double price) throws Exception{
+    	super(seatClass, rows, 1);
+    	throw new Exception("not implemented");
+    }
 
 
     boolean bookSeat(char c, int i)
