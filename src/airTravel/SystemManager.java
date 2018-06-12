@@ -1,6 +1,6 @@
 package airTravel;
 
-import travel.SeatClass;
+import travel.*;
 
 import java.util.HashMap;
 
@@ -164,5 +164,17 @@ public class SystemManager
         {
             airlines.get(airLiner).display();
         }
+    }
+    
+    public void addAirports(Airport[] airports)
+    {
+    	for(Airport h : airports)
+    		this.airports.put(h.getName(), h);
+    }
+    
+    public void addAirlines(Airline[] airlines)
+    {
+    	for(Airline a: airlines)
+    		this.airlines.put(a.getName(), a);
     }
 }

@@ -13,18 +13,23 @@ public class AirportFactory
 		int start = 1;
 		int end = delemeterIndex(config, "]",start);
 		String[] airportNames = config.substring(start,end).split(",");
+		Airport[] airports = new Airport[airportNames.length];
+		for(int i = 0; i < airports.length;i++)
+			airports[i] = new Airport(airportNames[i]);
 		
 		start = end+2;
 		end = delemeterIndex(config,"}",start);
-		String[] airlineConfig = config.substring(start,end).split("]],");
+		String[] airlineConfig = config.substring(start,end-2).split("]],");
 		Airline[] airLines = new Airline[airlineConfig.length];
 		for(int i = 0; i < airLines.length;i++)
 		{
 			airLines[i] = parseAirline(airlineConfig[i]);
 		}
 		
-		
-		return null;
+		SystemManager sys = new SystemManager();
+		sys.addAirlines(airLines);
+		sys.addAirports(airports);
+		return sys;
 	}
 	
 	private Airline parseAirline(String s) 
@@ -40,7 +45,6 @@ public class AirportFactory
 		for(int i = 0; i < flightConfig.length; i++)
 		{
 			flights[i] = parseFlight(flightConfig[i],al);
-			al.addFlight(flights[i]);
 		}
 		
 		
@@ -65,6 +69,8 @@ public class AirportFactory
 				Integer.parseInt(dates[2]),
 				Integer.parseInt(dates[3]),
 				Integer.parseInt(dates[4]));
+		
+		al.addFlight(f);
 		
 		String[] sections = sectionInfo.split(",");
 		for(String section : sections) {

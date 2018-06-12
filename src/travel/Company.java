@@ -14,7 +14,7 @@ public abstract class Company
         this.trips = new ArrayList<>();
     }
 
-    protected final String getName()
+    public final String getName()
     {
         return this.name;
     }

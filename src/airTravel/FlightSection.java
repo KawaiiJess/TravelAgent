@@ -10,7 +10,7 @@ public class FlightSection extends Section
     FlightSection(SeatClass seatClass, int rows, int cols) throws IllegalArgumentException
     {
         super(seatClass, rows, cols);
-
+        this.layoutCode = 'N';
         if (rows > 100 || cols > 10)
         {
             throw new IllegalArgumentException("to many rows or cols passed to new FlightSection");
@@ -19,7 +19,7 @@ public class FlightSection extends Section
     
     FlightSection(SeatClass seatClass, int rows, char layout, double price){
     	super(seatClass, rows, getNumCols(layout));
-    	
+    	this.layoutCode = layout;
     }
 
     private static int getNumCols(char layoutCode)
