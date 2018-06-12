@@ -16,8 +16,12 @@ public class AirportFactory
 		
 		start = end+2;
 		end = delemeterIndex(config,"}",start);
-		String[] airlines = config.substring(start,end).split("]],");
-		
+		String[] airlineConfig = config.substring(start,end).split("]],");
+		Airline[] airLines = new Airline[airlineConfig.length];
+		for(int i = 0; i < airLines.length;i++)
+		{
+			airLines[i] = parseAirline(airlineConfig[i]);
+		}
 		
 		
 		return null;
@@ -30,24 +34,32 @@ public class AirportFactory
 		
 		Airline al = new Airline(name);
 		
-		String[] flights = s.substring(dataStart).split("],");
+		String[] flightConfig = s.substring(dataStart).split("],");
+		Flight[] flights = new Flight[flightConfig.length];
+		
+		for(int i = 0; i < flightConfig.length; i++)
+		{
+			flights[i] = parseFlight(flightConfig[i],al);
+			al.addFlight(flights[i]);
+		}
+		
 		
 		return al;
 	}
 	
-	private Flight parseFlight(String s)
+	private Flight parseFlight(String s, Airline al)
 	{
 		int dataStart = delemeterIndex(s,"|",0)+1;
 		String name = s.substring(0,dataStart-1);
-		String[] data = s.substring(dataStart).split("|");
+		String[] data = s.substring(dataStart).split("\\|");
 		
-		String[] dates = data[1].split(",");
+		String[] dates = data[0].split(",");
 		
-		int sectionInfoDataStart = delemeterIndex(data[3],"[",0);
-		String sectionInfo = data[3].substring(sectionInfoDataStart+1);
-		data[3] = data[3].substring(0,sectionInfoDataStart);
+		int sectionInfoDataStart = delemeterIndex(data[2],"[",0);
+		String sectionInfo = data[2].substring(sectionInfoDataStart+1);
+		data[2] = data[2].substring(0,sectionInfoDataStart);
 		
-		Flight f = new Flight(name,data[2],data[3],
+		Flight f = new Flight(name,data[1],data[2],
 				Integer.parseInt(dates[0]),
 				Integer.parseInt(dates[1]),
 				Integer.parseInt(dates[2]),
@@ -56,7 +68,7 @@ public class AirportFactory
 		
 		String[] sections = sectionInfo.split(",");
 		for(String section : sections) {
-			parseSection(f,section);
+			parseSection(f.getName(),al,section);
 		}
 		
 		return f;

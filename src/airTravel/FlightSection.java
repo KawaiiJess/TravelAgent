@@ -5,6 +5,8 @@ import travel.Section;
 
 public class FlightSection extends Section
 {
+	private char layoutCode;
+	
     FlightSection(SeatClass seatClass, int rows, int cols) throws IllegalArgumentException
     {
         super(seatClass, rows, cols);
@@ -15,11 +17,19 @@ public class FlightSection extends Section
         }
     }
     
-    FlightSection(SeatClass seatClass, int rows, char layout, double price) throws Exception{
-    	super(seatClass, rows, 1);
-    	throw new Exception("not implemented");
+    FlightSection(SeatClass seatClass, int rows, char layout, double price){
+    	super(seatClass, rows, getNumCols(layout));
+    	
     }
 
+    private static int getNumCols(char layoutCode)
+    {
+    	if(layoutCode == 'S')
+    		return 3;
+    	if(layoutCode == 'M')
+    		return 4;
+    	return 10;
+    }
 
     boolean bookSeat(char c, int i)
     {
