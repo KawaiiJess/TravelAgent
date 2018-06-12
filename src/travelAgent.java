@@ -1,8 +1,14 @@
+import airTravel.AirportFactory;
+import airTravel.SystemManager;
+
+import java.io.*;
 import java.util.Scanner;
 
 public class travelAgent
 {
     private static Scanner user = new Scanner(System.in);
+    private static File file;
+    private static SystemManager sysMgr;
 
     private static void displayMenu()
     {
@@ -18,20 +24,10 @@ public class travelAgent
         System.out.println("=================Make a Selection=================");
     }
 
-    private static int intParam()
-    {
-        while (!user.hasNextInt())
-        {
-            user.next();
-        }
-        return user.nextInt();
-    }
-
     public static void main(String[] args)
     {
         displayMenu();
         int choice = intParam();
-        System.out.println("Your choice was: " + choice);
         while (choice > 0)
         {
             switch (choice)
@@ -62,16 +58,56 @@ public class travelAgent
             }
             System.out.print("\n\n");
             displayMenu();
-            choice = user.nextInt();
+            choice = intParam();
         }
         user.close();
     }
 
+    private static int intParam()
+    {
+        while (!user.hasNextInt())
+        {
+            user.next();
+            System.out.println("Integers only please.");
+        }
+        return user.nextInt();
+    }
 
+    private static String travelMethod()
+    {
+        System.out.println("Airplane 'A' or Cruise 'C'?");
+        while (!user.next().equals("A") || !user.next().equals("C"))
+        {
+            user.next();
+            System.out.println("'A' or 'C' only please.");
+        }
+        return user.next();
+    }
+
+    private static String getFile() throws IOException
+    {
+        System.out.print("Enter the name of your AMS file without extension: ");
+        file = new File(user.next() + ".ams");
+        if (file.exists() && file.isFile())
+        {
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            return br.readLine();
+        }
+        return null;
+    }
 
     private static void loadAMS()
     {
         System.out.println(" 1: Generate airport system using AMS file.");
+        try
+        {
+            AirportFactory f = new AirportFactory();
+            sysMgr = f.buildAirportSystem(getFile());
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
     }
 
     private static void generateManually()
@@ -97,6 +133,7 @@ public class travelAgent
     private static void displaySystem()
     {
         System.out.println(" 6: Display system.");
+        sysMgr.displaySystemDetails();
     }
 
     private static void saveAMS()
