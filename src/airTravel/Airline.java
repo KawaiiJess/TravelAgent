@@ -47,6 +47,11 @@ class Airline extends Company
     {
         return super.getTrips(orig, dest);
     }
+    
+    String[] getFlight(String orig, String dest, int year, int month, int day)
+    {
+    	return super.getTrips(orig, dest, year, month, day);
+    }
 
     boolean addFlight(String name, String source, String dest, int year, int month, int day)
     {

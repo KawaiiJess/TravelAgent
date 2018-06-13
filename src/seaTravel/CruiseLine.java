@@ -31,6 +31,11 @@ public class CruiseLine extends Company
 		return super.getTrips(orig, dest);
 	}
 	
+	String[] getCruise(String orig, String dest, int year, int month, int day)
+	{
+		return super.getTrips(orig, dest,year,month,day);
+	}
+	
 	boolean addCruise(String name, String source, String dest, int year, int month, int day)
 	{
 		if(name==null)

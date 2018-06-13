@@ -1,7 +1,9 @@
 package travel;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.GregorianCalendar;
 
 public abstract class Company
 {
@@ -58,7 +60,31 @@ public abstract class Company
         }
         return castObjectToStringArray(selectedTrips.toArray());
     }
+    
+    protected final String[] getTrips(String src, String dest, int year, int month, int day)
+    {
+    	Calendar departure = new GregorianCalendar(year,month,day);
+    	Collection<String> selectedTrips = new ArrayList<>();
+        for (Trip t : this.trips)
+        {
+        	Calendar c = t.getDeparture();
+            if (t.getSource().equals(src) && t.getDestination().equals(dest) && isSameDay(departure,c))
+            {
+                selectedTrips.add(t.getName());
+            }
+        }
+        return castObjectToStringArray(selectedTrips.toArray());
+    }
 
+    private static boolean isSameDay(Calendar cal1, Calendar cal2) {
+        if (cal1 == null || cal2 == null) 
+            throw new IllegalArgumentException("The date must not be null");
+        
+        return (cal1.get(Calendar.ERA) == cal2.get(Calendar.ERA)
+                && cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR) && cal1
+                .get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR));
+    }
+    
     private String[] castObjectToStringArray(Object[] ara)
     {
         String[] s = new String[ara.length];
