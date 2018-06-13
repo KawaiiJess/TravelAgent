@@ -31,7 +31,7 @@ public abstract class Trip
         sections = new ArrayList<>();
     }
 
-    private static Calendar validateDate(int yr, int mnth, int day, int hr, int min)
+    public static Calendar validateDate(int yr, int mnth, int day, int hr, int min)
     {
         Calendar d;
         try

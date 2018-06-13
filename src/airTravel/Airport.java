@@ -2,28 +2,15 @@ package airTravel;
 
 import travel.Hub;
 
-public class Airport implements Hub
+public class Airport extends Hub
 {
     private String name;
 
-    Airport(String name) throws IllegalArgumentException
+    Airport(String name)
     {
-        String nameUpper = name.toUpperCase();
-        if (nameUpper.length() == 3)
+        if (Hub.validateName(name))
         {
-            char[] chars = nameUpper.toCharArray();
-            for (char c : chars)
-            {
-                if (!Character.isLetter(c))
-                {
-                    throw new IllegalArgumentException();
-                }
-            }
-            this.name = nameUpper;
-        }
-        else
-        {
-            throw new IllegalArgumentException();
+            this.name = name;
         }
     }
 

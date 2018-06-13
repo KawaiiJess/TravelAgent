@@ -1,17 +1,23 @@
 import airTravel.AirportFactory;
 import airTravel.SystemManager;
+import travel.Hub;
+import travel.Trip;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Scanner;
 
 public class travelAgent
 {
     private static Scanner user = new Scanner(System.in);
     private static File file;
-    private static SystemManager sysMgr;
+    private static SystemManager airSysMgr;
+    private static SystemManager seaSysMgr;
+    private static SystemManager trainSysMgr;
 
     private static void displayMenu()
     {
@@ -22,7 +28,8 @@ public class travelAgent
         System.out.println(" 4: Change seat price.");
         System.out.println(" 5: Book a seat.");
         System.out.println(" 6: Display system.");
-        System.out.println(" 7: Serialize airport system into an AMS file.");
+        System.out.println(" 7: Delete system.");
+        System.out.println(" 8: Serialize airport system into an AMS file.");
         System.out.println("-1: Close Travel Agent.");
         System.out.println("=================Make a Selection=================");
     }
@@ -54,6 +61,9 @@ public class travelAgent
                     displaySystem();
                     break;
                 case 7:
+                    deleteSystem();
+                    break;
+                case 8:
                     saveAMS();
                     break;
                 default:
@@ -96,12 +106,57 @@ public class travelAgent
             BufferedReader br = new BufferedReader(new FileReader(file));
             return br.readLine();
         }
-        return null;
+        return "";
     }
 
     private static char determineTravelType(String AMS)
     {
-        return AMS.charAt(0);
+        return AMS.toUpperCase().charAt(0);
+    }
+
+    private static ArrayList<Object> getQueryInfo() //orig/dest/full date
+    {
+        ArrayList<Object> query = new ArrayList<>();
+        boolean origValid = false;
+        while (!origValid)
+        {
+            System.out.println("Origin?: ");
+            String orig = user.next();
+            origValid = Hub.validateName(orig);
+            if (origValid)
+            {
+                query.add(orig);
+            }
+        }
+
+        boolean destValid = false;
+        while (!destValid)
+        {
+            System.out.println("Destination?: ");
+            String dest = user.next();
+            destValid = Hub.validateName(dest);
+            if (destValid)
+            {
+                query.add(dest);
+            }
+        }
+
+        Calendar dateValid = null;
+        while (dateValid == null)
+        {
+            System.out.println("Date? [year, month, day]: ");
+            int year = intParam();
+            int month = intParam();
+            int day = intParam();
+            dateValid = Trip.validateDate(year, month, day, 0, 0);
+            if (dateValid != null)
+            {
+                query.add(year);
+                query.add(month);
+                query.add(day);
+            }
+        }
+        return query;
     }
 
     private static void loadAMS()
@@ -111,8 +166,11 @@ public class travelAgent
         {
             String AMS = getFile();
             char type = determineTravelType(AMS);
-            AirportFactory f = new AirportFactory();
-            sysMgr = f.buildAirportSystem(AMS, type);
+            if (!AMS.equals(""))
+            {
+                AirportFactory f = new AirportFactory();
+                airSysMgr = f.buildAirportSystem(AMS, type);
+            }
         }
         catch (Exception e)
         {
@@ -127,7 +185,19 @@ public class travelAgent
 
     private static void queryAvailable()
     {
-        System.out.println(" 3: Query available trips.");
+        char type = travelMethod().toUpperCase().charAt(0);
+        if (type == 'C')
+        {
+            //seaSysMgr.findAvailableCabins();
+        }
+        else if (type == 'T')
+        {
+            //trainSysMgr.findAvailableTrains();
+        }
+        else
+        {
+            //airSysMgr.findAvailableFlights();
+        }
     }
 
     private static void changePricing()
@@ -137,17 +207,57 @@ public class travelAgent
 
     private static void bookSeat()
     {
-        System.out.println(" 5: Book a seat.");
+        /*char type = travelMethod().toUpperCase().charAt(0);
+        if (type == 'C')
+        {
+            seaSysMgr.bookSeat();
+        }
+        else if (type == 'T')
+        {
+            trainSysMgr.bookSeat();
+        }
+        else
+        {
+            airSysMgr.bookSeat();
+        }*/
     }
 
     private static void displaySystem()
     {
-        System.out.println(" 6: Display system.");
-        sysMgr.displaySystemDetails();
+        char type = travelMethod().toUpperCase().charAt(0);
+        if (type == 'C')
+        {
+            seaSysMgr.displaySystemDetails();
+        }
+        else if (type == 'T')
+        {
+            trainSysMgr.displaySystemDetails();
+        }
+        else
+        {
+            airSysMgr.displaySystemDetails();
+        }
     }
 
     private static void saveAMS()
     {
         System.out.println(" 7: Serialize airport system into an AMS file.");
+    }
+
+    private static void deleteSystem()
+    {
+        char type = travelMethod().toUpperCase().charAt(0);
+        if (type == 'C')
+        {
+            seaSysMgr = new SystemManager();
+        }
+        else if (type == 'T')
+        {
+            trainSysMgr = new SystemManager();
+        }
+        else
+        {
+            airSysMgr = new SystemManager();
+        }
     }
 }
