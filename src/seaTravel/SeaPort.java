@@ -2,7 +2,7 @@ package seaTravel;
 
 import travel.Hub;
 
-public class SeaPort implements Hub 
+public class SeaPort extends Hub 
 {
 	private String name;
 
