@@ -90,14 +90,14 @@ public class AirportFactory
         String[] sections = sectionInfo.split(",");
         for (String section : sections)
         {
-            parseSection(f.getName(), al, section);
+            parseSection(f, al, section);
         }
 
         return f;
 
     }
 
-    private void parseSection(String flightName, Airline airline, String s)
+    private void parseSection(Flight f, Airline airline, String s)
     {
         String[] data = s.split(":");
 
@@ -118,9 +118,9 @@ public class AirportFactory
         Section section = new FlightSection(
                 seatClass,
                 Integer.parseInt(data[3]),
-                data[2].toCharArray()[0],
-                Double.parseDouble(data[1]));
-        airline.addFlightSection(flightName, section);
+                data[2].toCharArray()[0]);
+        airline.addFlightSection(f.getName(), section);
+        airline.setPricing(f.getSource(), f.getDestination(), seatClass, Double.parseDouble(data[1]));
     }
 
     private int delemeterIndex(String search, String s, int start)

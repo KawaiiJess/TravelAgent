@@ -7,12 +7,13 @@ public abstract class Company
 {
     private Collection<Trip> trips;
     private String name;
+    private PricingManager pricingManager;
 
     protected Company(String name)
     {
-    	
         this.name = validateName(name);
         this.trips = new ArrayList<>();
+        this.pricingManager = new PricingManager();
     }
 
     public final String getName()
@@ -121,5 +122,19 @@ public abstract class Company
         {
             throw new IllegalArgumentException();
         }
+    }
+    
+    public final double getPricing(String orig, String dest, SeatClass seatClass)
+    {
+    	return this.pricingManager.getPricing(orig, dest, seatClass);
+    }
+    
+    public final boolean setPricing(String orig, String dest, SeatClass seatClass, double price)
+    {
+    	try {
+    		this.pricingManager.setPricing(orig, dest, seatClass, price);
+    		return true;
+    	}catch(IllegalArgumentException e) {}
+    	return false;
     }
 }
