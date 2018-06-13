@@ -14,7 +14,6 @@ import java.util.Scanner;
 public class travelAgent
 {
     private static Scanner user = new Scanner(System.in);
-    private static File file;
     private static SystemManager airSysMgr;
     private static SystemManager seaSysMgr;
     private static SystemManager trainSysMgr;
@@ -100,7 +99,7 @@ public class travelAgent
     private static String getFile() throws IOException
     {
         System.out.print("Enter the name of your AMS file without extension: ");
-        file = new File(user.next() + ".ams");
+        File file = new File(user.next() + ".ams");
         if (file.exists() && file.isFile())
         {
             BufferedReader br = new BufferedReader(new FileReader(file));
@@ -114,7 +113,7 @@ public class travelAgent
         return AMS.toUpperCase().charAt(0);
     }
 
-    private static ArrayList<Object> getQueryInfo() //orig/dest/full date
+    private static ArrayList<Object> getQueryInfo()
     {
         ArrayList<Object> query = new ArrayList<>();
         boolean origValid = false;

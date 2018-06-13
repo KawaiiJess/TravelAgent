@@ -118,23 +118,35 @@ public class SystemManager
         }
     }
 
-    public void findAvailableFlights(String orig, String dest)
+    public void findAvailableFlights(Object...objects)
     {
-        if (orig == null || dest == null || !airports.containsKey(orig) || !airports.containsKey(dest))
+        if (objects[0] == null || objects[1] == null || !airports.containsKey((String)objects[0]) || !airports.containsKey((String)objects[1]))
         {
             System.out.println("Unknown origin/dest");
             return;
         }
 
-        System.out.printf("Flights from %s to %s\n", orig, dest);
+        System.out.printf("Flights from %s to %s\n", objects[0], objects[1]);
         boolean haveFlight = false;
         for (String airLiner : airlines.keySet())
         {
-            for (String flight : airlines.get(airLiner).getFlight(orig, dest))
+            if (objects.length <= 2) //No date
             {
-                haveFlight = true;
-                System.out.println("\t" + flight);
+                for (String flight : airlines.get(airLiner).getFlight((String)objects[0], (String)objects[1]))
+                {
+                    haveFlight = true;
+                    System.out.println("\t" + flight);
+                }
             }
+            else
+            {
+                for (String flight : airlines.get(airLiner).getFlight((String)objects[0], (String)objects[1], (int)objects[2], (int)objects[3], (int)objects[4]))
+                {
+                    haveFlight = true;
+                    System.out.println("\t" + flight);
+                }
+            }
+            
         }
         if (!haveFlight)
         {
