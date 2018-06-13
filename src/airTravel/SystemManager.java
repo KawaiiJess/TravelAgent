@@ -1,6 +1,6 @@
 package airTravel;
 
-import travel.*;
+import travel.SeatClass;
 
 import java.util.HashMap;
 
@@ -75,10 +75,14 @@ public class SystemManager
         {
             Airline temp = airlines.get(aname);
             if (temp.addFlight(id, orig, dest, year, month, day))
-            	System.out.println("Added flight " + id + " to airline " + aname);
+            {
+                System.out.println("Added flight " + id + " to airline " + aname);
+            }
             else
+            {
                 System.out.println("Could not add flight!");
-            
+            }
+
         }
         else
         {
@@ -98,10 +102,14 @@ public class SystemManager
             {
                 Airline temp = airlines.get(air);
                 if (temp.createFlightSection(flID, s, rows, cols))
-                	System.out.println("Added section to flight " + flID);
+                {
+                    System.out.println("Added section to flight " + flID);
+                }
                 else
+                {
                     System.out.println("Could not add flight section!");
-                
+                }
+
             }
             else
             {
@@ -146,10 +154,14 @@ public class SystemManager
             {
                 Airline temp = airlines.get(air);
                 if (temp.bookSeat(fl, s, row, col))
-                	System.out.println("Booked seat " + row + col + " of flight " + fl);
+                {
+                    System.out.println("Booked seat " + row + col + " of flight " + fl);
+                }
                 else
+                {
                     System.out.println("Could not book seat!");
-                
+                }
+
             }
             else
             {
@@ -165,16 +177,20 @@ public class SystemManager
             airlines.get(airLiner).display();
         }
     }
-    
+
     public void addAirports(Airport[] airports)
     {
-    	for(Airport h : airports)
-    		this.airports.put(h.getName(), h);
+        for (Airport h : airports)
+        {
+            this.airports.put(h.getName(), h);
+        }
     }
-    
+
     public void addAirlines(Airline[] airlines)
     {
-    	for(Airline a: airlines)
-    		this.airlines.put(a.getName(), a);
+        for (Airline a : airlines)
+        {
+            this.airlines.put(a.getName(), a);
+        }
     }
 }

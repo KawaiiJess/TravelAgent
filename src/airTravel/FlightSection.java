@@ -5,8 +5,8 @@ import travel.Section;
 
 public class FlightSection extends Section
 {
-	private char layoutCode;
-	
+    private char layoutCode;
+
     FlightSection(SeatClass seatClass, int rows, int cols) throws IllegalArgumentException
     {
         super(seatClass, rows, cols);
@@ -16,19 +16,24 @@ public class FlightSection extends Section
             throw new IllegalArgumentException("to many rows or cols passed to new FlightSection");
         }
     }
-    
-    FlightSection(SeatClass seatClass, int rows, char layout, double price){
-    	super(seatClass, rows, getNumCols(layout));
-    	this.layoutCode = layout;
+
+    FlightSection(SeatClass seatClass, int rows, char layout, double price)
+    {
+        super(seatClass, rows, getNumCols(layout));
+        this.layoutCode = layout;
     }
 
     private static int getNumCols(char layoutCode)
     {
-    	if(layoutCode == 'S')
-    		return 3;
-    	if(layoutCode == 'M')
-    		return 4;
-    	return 10;
+        if (layoutCode == 'S')
+        {
+            return 3;
+        }
+        if (layoutCode == 'M')
+        {
+            return 4;
+        }
+        return 10;
     }
 
     boolean bookSeat(char c, int i)

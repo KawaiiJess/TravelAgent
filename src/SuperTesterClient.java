@@ -10,7 +10,7 @@ public class SuperTesterClient
         res.createAirport("DEN");
         res.createAirport("DFW");
         res.createAirport("LON");
-        
+
         System.out.println("\n\nCreating Airports: Should Fail");
         res.createAirport("DEN");//invalid
         res.createAirport("DENW");//invalid
@@ -22,7 +22,7 @@ public class SuperTesterClient
         res.createAirline("DELTA");
         res.createAirline("AMER");
         res.createAirline("FRONT");
-        
+
         System.out.println("\n\nCreating Airports: Should Fail");
         res.createAirline("FRONTIER"); //invalid
         res.createAirline("FRONT"); //invalid
@@ -33,7 +33,7 @@ public class SuperTesterClient
         res.createFlight("DELTA", "DEN", "LON", 2018, 10, 10, "123");
         res.createFlight("AMER", "LON", "DEN", 2018, 12, 10, "124");
         res.createFlight("DELTA", "DFW", "DEN", 2018, 9, 10, "125");
-        
+
         System.out.println("\n\nCreating Flights: Should Fail");
         res.createFlight("DELTA", "DEN", "DEN", 2018, 8, 8, "567abc");//same airport
         res.createFlight("DEL", "DEN", "LON", 2018, 9, 8, "567"); //invalid airline
@@ -46,7 +46,7 @@ public class SuperTesterClient
         System.out.println("\n\nCreating Sections: Should Succeed");
         res.createSection("DELTA", "123", 2, 2, SeatClass.economy);
         res.createSection("DELTA", "123", 2, 3, SeatClass.first);
-        
+
         System.out.println("\n\nCreating Sections: Should Fail");
         res.createSection("DELTA", "123", 2, 3, SeatClass.first);//Invalid
         res.createSection("SWSERTT", "123", 5, 5, SeatClass.economy);//Invalid airline
@@ -59,7 +59,7 @@ public class SuperTesterClient
         res.bookSeat("DELTA", "123", SeatClass.first, 1, 'A');
         res.bookSeat("DELTA", "123", SeatClass.economy, 1, 'A');
         res.bookSeat("DELTA", "123", SeatClass.economy, 1, 'B');
-        
+
         System.out.println("\n\nBooking Seats: Should Fail");
         res.bookSeat("DELTA888", "123", SeatClass.business, 1, 'A'); //Invalid airline
         res.bookSeat("DELTA", "123haha7", SeatClass.business, 1, 'A'); //Invalid flightId
@@ -71,13 +71,13 @@ public class SuperTesterClient
 
         System.out.println("\n\nFinding Flights: Should Succeed");
         res.findAvailableFlights("DEN", "LON");
-        
+
         System.out.println("\n\nFinding Flights: Should Fail");
         res.findAvailableFlights("DEN", "LONasdawd");
         res.findAvailableFlights("DasdasdaEN", "LON");
         res.findAvailableFlights(null, "LON");
         res.findAvailableFlights("DEN", null);
-        
+
         System.out.println("\n\nDisplaying System");
         res.displaySystemDetails();
     }

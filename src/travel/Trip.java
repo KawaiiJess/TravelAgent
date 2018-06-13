@@ -21,8 +21,10 @@ public abstract class Trip
         {
             throw new IllegalArgumentException("Bad Date given to new flight");
         }
-        if(source.equals(dest))
-        	throw new IllegalArgumentException("Same origin and destination");
+        if (source.equals(dest))
+        {
+            throw new IllegalArgumentException("Same origin and destination");
+        }
         this.source = source;
         this.dest = dest;
         this.name = name;

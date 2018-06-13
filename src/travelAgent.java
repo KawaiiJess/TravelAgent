@@ -1,7 +1,10 @@
 import airTravel.AirportFactory;
 import airTravel.SystemManager;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class travelAgent
@@ -13,7 +16,7 @@ public class travelAgent
     private static void displayMenu()
     {
         System.out.println("===================Travel Agent===================");
-        System.out.println(" 1: Generate airport system using AMS file.");
+        System.out.println(" 1: Generate system using an AMS file.");
         System.out.println(" 2: Generate system manually.");
         System.out.println(" 3: Query available trips.");
         System.out.println(" 4: Change seat price.");
@@ -96,13 +99,20 @@ public class travelAgent
         return null;
     }
 
+    private static char determineTravelType(String AMS)
+    {
+        return AMS.charAt(0);
+    }
+
     private static void loadAMS()
     {
         System.out.println(" 1: Generate airport system using AMS file.");
         try
         {
+            String AMS = getFile();
+            char type = determineTravelType(AMS);
             AirportFactory f = new AirportFactory();
-            sysMgr = f.buildAirportSystem(getFile());
+            sysMgr = f.buildAirportSystem(AMS, type);
         }
         catch (Exception e)
         {

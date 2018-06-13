@@ -50,14 +50,14 @@ class Airline extends Company
 
     boolean addFlight(Trip t)
     {
-    	return super.addTrip(t);
+        return super.addTrip(t);
     }
-    
+
     boolean addFlightSection(String flight, Section section)
     {
-    	return super.addSection(flight, section);
+        return super.addSection(flight, section);
     }
-    
+
     protected void display()
     {
         System.out.println("Airline: " + super.getName());

@@ -4,13 +4,14 @@ import travel.Trip;
 
 public class Flight extends Trip
 {
-	Flight(String name, String source, String dest, int yr, int mnth, int day, int hr, int min)
-	{
-		super(name,source,dest,yr,mnth,day,hr,min);
-	}
+    Flight(String name, String source, String dest, int yr, int mnth, int day, int hr, int min)
+    {
+        super(name, source, dest, yr, mnth, day, hr, min);
+    }
+
     Flight(String name, String source, String dest, int yr, int mnth, int day)
     {
-        this(name,source,dest,yr,mnth,day,0,0);
+        this(name, source, dest, yr, mnth, day, 0, 0);
     }
 
     public boolean equals(Object o)
@@ -35,7 +36,7 @@ public class Flight extends Trip
     }
 
     @Override
-	protected void display()
+    protected void display()
     {
         System.out.print("\tFlight =");
         super.display();
