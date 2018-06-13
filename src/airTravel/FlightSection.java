@@ -17,7 +17,7 @@ public class FlightSection extends Section
         }
     }
 
-    FlightSection(SeatClass seatClass, int rows, char layout, double price)
+    FlightSection(SeatClass seatClass, int rows, char layout)
     {
         super(seatClass, rows, getNumCols(layout));
         this.layoutCode = layout;
@@ -40,5 +40,4 @@ public class FlightSection extends Section
     {
         return super.bookSeat(c, i);
     }
-
 }

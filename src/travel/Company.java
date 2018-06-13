@@ -7,11 +7,13 @@ public abstract class Company
 {
     private Collection<Trip> trips;
     private String name;
+    private PricingManager pricingManager;
 
     protected Company(String name)
     {
-        this.name = name;
+        this.name = validateName(name);
         this.trips = new ArrayList<>();
+        this.pricingManager = new PricingManager();
     }
 
     public final String getName()
@@ -99,5 +101,40 @@ public abstract class Company
             }
         }
         return null;
+    }
+    
+    protected static String validateName(String name)
+    {
+        String nameUpper = name.toUpperCase();
+        if (nameUpper.length() < 7 && nameUpper.length() > 0)
+        {
+            char[] chars = nameUpper.toCharArray();
+            for (char c : chars)
+            {
+                if (!Character.isLetterOrDigit(c))
+                {
+                    throw new IllegalArgumentException();
+                }
+            }
+            return nameUpper;
+        }
+        else
+        {
+            throw new IllegalArgumentException();
+        }
+    }
+    
+    public final double getPricing(String orig, String dest, SeatClass seatClass)
+    {
+    	return this.pricingManager.getPricing(orig, dest, seatClass);
+    }
+    
+    public final boolean setPricing(String orig, String dest, SeatClass seatClass, double price)
+    {
+    	try {
+    		this.pricingManager.setPricing(orig, dest, seatClass, price);
+    		return true;
+    	}catch(IllegalArgumentException e) {}
+    	return false;
     }
 }

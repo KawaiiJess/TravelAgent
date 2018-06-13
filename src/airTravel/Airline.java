@@ -9,28 +9,7 @@ class Airline extends Company
 {
     Airline(String name) throws IllegalArgumentException
     {
-        super(validateName(name));
-    }
-
-    private static String validateName(String name)
-    {
-        String nameUpper = name.toUpperCase();
-        if (nameUpper.length() < 7 && nameUpper.length() > 0)
-        {
-            char[] chars = nameUpper.toCharArray();
-            for (char c : chars)
-            {
-                if (!Character.isLetterOrDigit(c))
-                {
-                    throw new IllegalArgumentException();
-                }
-            }
-            return nameUpper;
-        }
-        else
-        {
-            throw new IllegalArgumentException();
-        }
+        super(name);
     }
 
     boolean createFlightSection(String flight, SeatClass seatClass, int rows, int cols)
