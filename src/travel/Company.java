@@ -10,7 +10,8 @@ public abstract class Company
 
     protected Company(String name)
     {
-        this.name = name;
+    	
+        this.name = validateName(name);
         this.trips = new ArrayList<>();
     }
 
@@ -99,5 +100,26 @@ public abstract class Company
             }
         }
         return null;
+    }
+    
+    protected static String validateName(String name)
+    {
+        String nameUpper = name.toUpperCase();
+        if (nameUpper.length() < 7 && nameUpper.length() > 0)
+        {
+            char[] chars = nameUpper.toCharArray();
+            for (char c : chars)
+            {
+                if (!Character.isLetterOrDigit(c))
+                {
+                    throw new IllegalArgumentException();
+                }
+            }
+            return nameUpper;
+        }
+        else
+        {
+            throw new IllegalArgumentException();
+        }
     }
 }
