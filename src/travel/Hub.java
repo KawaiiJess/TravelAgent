@@ -26,4 +26,6 @@ public abstract class Hub
     public abstract String getName();
 
     public abstract void display();
+    
+    protected abstract String getAMSMemento();
 }

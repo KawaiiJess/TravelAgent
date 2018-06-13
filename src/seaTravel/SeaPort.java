@@ -29,4 +29,9 @@ public class SeaPort extends Hub
     {
         System.out.println("SeaPort: " + this.name);
     }
+    
+    protected String getAMSMemento()
+    {
+    	return this.name;
+    }
 }
