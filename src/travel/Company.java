@@ -163,4 +163,24 @@ public abstract class Company
     	}catch(IllegalArgumentException e) {}
     	return false;
     }
+    
+    public final String getAMSmemento()
+    {
+    	return String.format("%s[%s]",this.name,getFlightAMS());
+    }
+    
+    private String getFlightAMS() 
+    {
+    	boolean first = true;
+    	String returns = "";
+    	for(Trip t: trips)
+    	{
+    		if(first)
+    			first = false;
+    		else
+    			returns += ",";
+    		returns += t.getAMSmemento(pricingManager);
+    	}
+    	return returns;
+    }
 }

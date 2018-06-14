@@ -30,7 +30,7 @@ public class SeaPort extends Hub
         System.out.println("SeaPort: " + this.name);
     }
     
-    protected String getAMSMemento()
+    protected String getAMSmemento()
     {
     	return this.name;
     }

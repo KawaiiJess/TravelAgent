@@ -7,7 +7,7 @@ public class Cabins extends Section
 {
 	Cabins(int numCabins) throws IllegalArgumentException
 	{
-		super(SeatClass.economy, numCabins,1);
+		super(SeatClass.economy, numCabins,1,'N');
 	}
 	
 	boolean bookRoom(int roomNum)

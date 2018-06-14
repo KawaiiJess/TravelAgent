@@ -27,5 +27,5 @@ public abstract class Hub
 
     public abstract void display();
     
-    protected abstract String getAMSMemento();
+    protected abstract String getAMSmemento();
 }

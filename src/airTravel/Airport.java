@@ -24,7 +24,7 @@ public class Airport extends Hub
         System.out.println("Airport: " + this.name);
     }
     
-    protected String getAMSMemento()
+    protected String getAMSmemento()
     {
     	return this.name;
     }
