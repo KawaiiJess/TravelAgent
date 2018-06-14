@@ -145,32 +145,9 @@ public class travelAgent
         }
     }
 
-    private static ArrayList<Object> getQueryInfo()
+    private static int[] getDate()
     {
-        ArrayList<Object> query = new ArrayList<>();
-        boolean origValid = false;
-        while (!origValid)
-        {
-            System.out.println("Origin?: ");
-            String orig = user.next();
-            origValid = Hub.validateName(orig);
-            if (origValid)
-            {
-                query.add(orig);
-            }
-        }
-
-        boolean destValid = false;
-        while (!destValid)
-        {
-            System.out.println("Destination?: ");
-            String dest = user.next();
-            destValid = Hub.validateName(dest);
-            if (destValid)
-            {
-                query.add(dest);
-            }
-        }
+        int[] date = new int[3];
 
         Calendar dateValid = null;
         while (dateValid == null)
@@ -182,12 +159,12 @@ public class travelAgent
             dateValid = Trip.validateDate(year, month, day, 0, 0);
             if (dateValid != null)
             {
-                query.add(year);
-                query.add(month);
-                query.add(day);
+                date[0] = year;
+                date[1] = month;
+                date[2] = day;
             }
         }
-        return query;
+        return date;
     }
 
     private static char getSeatPreference()
@@ -346,7 +323,11 @@ public class travelAgent
     private static void queryAvailable()
     {
         char type = travelMethod().charAt(0);
-        ArrayList<Object> input = getQueryInfo();
+        int[] date = getDate();
+        System.out.println("Origin?: ");
+        String orig = getHub();
+        System.out.println("Destination?: ");
+        String dest = getHub();
         if (type == 'C')
         {
             //seaSysMgr.findAvailableCabins();
@@ -357,7 +338,7 @@ public class travelAgent
         }
         else
         {
-            airSysMgr.findAvailableFlights((String)input.get(0), (String)input.get(1), (int)input.get(2), (int)input.get(3), (int)input.get(4));
+            airSysMgr.findAvailableFlights(orig, dest, date[0], date[1], date[2]);
         }
     }
 
