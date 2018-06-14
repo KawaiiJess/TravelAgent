@@ -1,7 +1,6 @@
 import airTravel.AirportFactory;
 import airTravel.SystemManager;
-import travel.Hub;
-import travel.Trip;
+import travel.*;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -88,12 +87,13 @@ public class travelAgent
     private static String travelMethod()
     {
         System.out.println("Airplane 'A' or Cruise 'C'?");
-        while (!user.next().equals("A") || !user.next().equals("C"))
+        String temp = user.next().toUpperCase();
+        while (!temp.equals("A") && !temp.equals("C"))
         {
-            user.next();
+            temp = user.next();
             System.out.println("'A' or 'C' only please.");
         }
-        return user.next();
+        return temp;
     }
 
     private static String getFile() throws IOException
@@ -158,6 +158,13 @@ public class travelAgent
         return query;
     }
 
+    private static char getSeatPreference()
+    {
+        System.out.println("Do you have a seat preference (Window, Aisle, Neither)?: ");
+        String temp = user.next().toUpperCase();
+        return temp.charAt(0);
+    }
+
     private static void loadAMS()
     {
         System.out.println(" 1: Generate airport system using AMS file.");
@@ -184,7 +191,8 @@ public class travelAgent
 
     private static void queryAvailable()
     {
-        char type = travelMethod().toUpperCase().charAt(0);
+        char type = travelMethod().charAt(0);
+        ArrayList<Object> input = getQueryInfo();
         if (type == 'C')
         {
             //seaSysMgr.findAvailableCabins();
@@ -195,7 +203,7 @@ public class travelAgent
         }
         else
         {
-            //airSysMgr.findAvailableFlights();
+            airSysMgr.findAvailableFlights(input.get(0), input.get(1), input.get(2), input.get(3), input.get(4));
         }
     }
 
@@ -204,26 +212,82 @@ public class travelAgent
         System.out.println(" 4: Change seat price.");
     }
 
+    private static ArrayList<Object> getSeatInfo()
+    {
+        ArrayList<Object> seatInfo = new ArrayList<>();
+//        boolean origValid = false;
+//        while (!origValid)
+//        {
+//            System.out.println("Company?: ");
+//            String orig = user.next();
+//            origValid = Company.validateName(orig);
+//            if (origValid)
+//            {
+//                query.add(orig);
+//            }
+//        }
+//
+//        boolean destValid = false;
+//        while (!destValid)
+//        {
+//            System.out.println("Destination?: ");
+//            String dest = user.next();
+//            destValid = Hub.validateName(dest);
+//            if (destValid)
+//            {
+//                query.add(dest);
+//            }
+//        }
+//
+//        Calendar dateValid = null;
+//        while (dateValid == null)
+//        {
+//            System.out.println("Date? [year, month, day]: ");
+//            int year = intParam();
+//            int month = intParam();
+//            int day = intParam();
+//            dateValid = Trip.validateDate(year, month, day, 0, 0);
+//            if (dateValid != null)
+//            {
+//                query.add(year);
+//                query.add(month);
+//                query.add(day);
+//            }
+//        }
+        return seatInfo;
+
+    }
+
     private static void bookSeat()
     {
-        /*char type = travelMethod().toUpperCase().charAt(0);
+        char type = travelMethod().toUpperCase().charAt(0);
         if (type == 'C')
         {
-            seaSysMgr.bookSeat();
+            //seaSysMgr.bookSeat();
         }
         else if (type == 'T')
         {
-            trainSysMgr.bookSeat();
+            //trainSysMgr.bookSeat();
         }
         else
         {
-            airSysMgr.bookSeat();
-        }*/
+            char pref = getSeatPreference();
+            if (pref != 'W' && pref != 'A')
+            {
+                //Book using only airline & pref
+            }
+            else
+            {
+
+            }
+            //airSysMgr.bookSeat();
+            //res.bookSeat("DELTA", "123", SeatClass.first, 1, 'A');
+        }
     }
 
     private static void displaySystem()
     {
-        char type = travelMethod().toUpperCase().charAt(0);
+        char type = travelMethod().charAt(0);
         if (type == 'C')
         {
             seaSysMgr.displaySystemDetails();
@@ -245,7 +309,7 @@ public class travelAgent
 
     private static void deleteSystem()
     {
-        char type = travelMethod().toUpperCase().charAt(0);
+        char type = travelMethod().charAt(0);
         if (type == 'C')
         {
             seaSysMgr = new SystemManager();

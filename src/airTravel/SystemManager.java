@@ -118,35 +118,37 @@ public class SystemManager
         }
     }
 
-    public void findAvailableFlights(Object...objects)
+    public void findAvailableFlights(Object... objects) //[Origin, Destination, Year, Month, Day]
     {
-        if (objects[0] == null || objects[1] == null || !airports.containsKey((String)objects[0]) || !airports.containsKey((String)objects[1]))
+        Object[] temp = new Object[5];
+        if (objects[0] == null || objects[1] == null || !airports.containsKey((String) objects[0]) || !airports.containsKey((String) objects[1]))
         {
             System.out.println("Unknown origin/dest");
             return;
+        }
+
+        if (objects.length == 2)
+        {
+            temp[0] = objects[0];
+            temp[1] = objects[1];
+            temp[2] = 0;
+            temp[3] = 0;
+            temp[4] = 0;
+        }
+        else
+        {
+            temp = objects;
         }
 
         System.out.printf("Flights from %s to %s\n", objects[0], objects[1]);
         boolean haveFlight = false;
         for (String airLiner : airlines.keySet())
         {
-            if (objects.length <= 2) //No date
+            for (String flight : airlines.get(airLiner).getFlight((String) objects[0], (String) objects[1], (int) temp[2], (int) temp[3], (int) temp[4]))
             {
-                for (String flight : airlines.get(airLiner).getFlight((String)objects[0], (String)objects[1]))
-                {
-                    haveFlight = true;
-                    System.out.println("\t" + flight);
-                }
+                haveFlight = true;
+                System.out.println("\t" + flight);
             }
-            else
-            {
-                for (String flight : airlines.get(airLiner).getFlight((String)objects[0], (String)objects[1], (int)objects[2], (int)objects[3], (int)objects[4]))
-                {
-                    haveFlight = true;
-                    System.out.println("\t" + flight);
-                }
-            }
-            
         }
         if (!haveFlight)
         {

@@ -129,7 +129,7 @@ public abstract class Company
         return null;
     }
     
-    protected static String validateName(String name)
+    public static String validateName(String name)
     {
         String nameUpper = name.toUpperCase();
         if (nameUpper.length() < 7 && nameUpper.length() > 0)
