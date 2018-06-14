@@ -168,65 +168,7 @@ public class travelAgent
         return temp.charAt(0);
     }
 
-    private static void loadAMS()
-    {
-        try
-        {
-            String AMS = getFile();
-            char type = determineTravelType(AMS);
-            if (!AMS.equals(""))
-            {
-                if (type == 'C')
-                {
-                    //seaSysMgr.findAvailableCabins();
-                }
-                else if (type == 'T')
-                {
-                    //trainSysMgr.findAvailableTrains();
-                }
-                else
-                {
-                    AirportFactory f = new AirportFactory();
-                    airSysMgr = f.buildAirportSystem(AMS, type);
-                }
-            }
-        }
-        catch (Exception e)
-        {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    private static void generateManually() //Make a second menu to manually perform sampleclient operations.
-    {
-        System.out.println(" 2: Generate system manually.");
-    }
-
-    private static void queryAvailable()
-    {
-        char type = travelMethod().charAt(0);
-        ArrayList<Object> input = getQueryInfo();
-        if (type == 'C')
-        {
-            //seaSysMgr.findAvailableCabins();
-        }
-        else if (type == 'T')
-        {
-            //trainSysMgr.findAvailableTrains();
-        }
-        else
-        {
-            airSysMgr.findAvailableFlights(input.get(0), input.get(1), input.get(2), input.get(3), input.get(4));
-        }
-    }
-
-    private static void changePricing()
-    {
-        System.out.println(" 4: Change seat price.");
-    }
-
-    //res.bookSeat("DELTA", "123", SeatClass.first, 1, 'A');
-    private static ArrayList<Object> getSeatInfo() //public void bookSeat(String air, String fl, SeatClass s, int row, char col)
+    private static ArrayList<Object> getSeatInfo()
     {
         ArrayList<Object> seatInfo = new ArrayList<>();
         boolean airlineValid = false;
@@ -265,6 +207,73 @@ public class travelAgent
         return seatInfo;
     }
 
+
+    //1: Generate system using an AMS file.
+    private static void loadAMS()
+    {
+        try
+        {
+            String AMS = getFile();
+            char type = determineTravelType(AMS);
+            if (!AMS.equals(""))
+            {
+                if (type == 'C')
+                {
+                    //seaSysMgr.findAvailableCabins();
+                }
+                else if (type == 'T')
+                {
+                    //trainSysMgr.findAvailableTrains();
+                }
+                else
+                {
+                    AirportFactory f = new AirportFactory();
+                    airSysMgr = f.buildAirportSystem(AMS, type);
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+    }
+
+
+    //2: Generate system manually.
+    private static void generateManually() //Make a second menu to manually perform sampleclient operations.
+    {
+        //do stuff
+    }
+
+
+    //3: Query available trips.
+    private static void queryAvailable()
+    {
+        char type = travelMethod().charAt(0);
+        ArrayList<Object> input = getQueryInfo();
+        if (type == 'C')
+        {
+            //seaSysMgr.findAvailableCabins();
+        }
+        else if (type == 'T')
+        {
+            //trainSysMgr.findAvailableTrains();
+        }
+        else
+        {
+            airSysMgr.findAvailableFlights(input.get(0), input.get(1), input.get(2), input.get(3), input.get(4));
+        }
+    }
+
+
+    //4: Change seat price.
+    private static void changePricing()
+    {
+        System.out.println(" 4: Change seat price.");
+    }
+
+
+    //5: Book a seat.
     private static void bookSeat()
     {
         char type = travelMethod().toUpperCase().charAt(0);
@@ -291,6 +300,8 @@ public class travelAgent
         }
     }
 
+
+    //6: Display system.
     private static void displaySystem()
     {
         char type = travelMethod().charAt(0);
@@ -308,11 +319,15 @@ public class travelAgent
         }
     }
 
+
+    //7: Delete system.
     private static void saveAMS()
     {
         System.out.println(" 7: Serialize airport system into an AMS file.");
     }
 
+
+    //8: Serialize airport system into an AMS file.
     private static void deleteSystem()
     {
         char type = travelMethod().charAt(0);
