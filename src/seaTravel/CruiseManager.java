@@ -2,6 +2,8 @@ package seaTravel;
 
 import java.util.HashMap;
 
+import travel.SeatClass;
+
 public class CruiseManager {
 	private HashMap<String, Seaport> seaports;
     private HashMap<String, CruiseLine> cruiselines;
@@ -93,6 +95,25 @@ public class CruiseManager {
             System.out.println("That cruiseline doesn't exist!");
         }
 
+    }
+    
+    public void changePricing(String cruiseline, String source, String dest, SeatClass sc, double newPrice)
+    {
+    	if(!cruiselines.containsKey(cruiseline))
+    	{
+    		System.out.println("Unknown Airline");
+    		return;
+    	}
+    	if(!seaports.containsKey(source) || !seaports.containsKey(dest))
+    	{
+    		System.out.println("Unknown Airport");
+    		return;
+    	}
+    	
+    	if(cruiselines.get(cruiseline).setPricing(source, dest, sc, newPrice))
+    		System.out.println("Price Change Successfull");
+    	else
+    		System.out.println("Failed to change price");	
     }
     
     public void findAvailableCruises(String orig, String dest, int...ints) //[Origin, Destination, Year, Month, Day]
