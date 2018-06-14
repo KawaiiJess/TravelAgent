@@ -6,8 +6,10 @@ import travel.SeatClass;
 import travel.Trip;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -117,7 +119,9 @@ public class travelAgent
         if (file.exists() && file.isFile())
         {
             BufferedReader br = new BufferedReader(new FileReader(file));
-            return br.readLine();
+            String s = br.readLine();
+            br.close();
+            return s;
         }
         return "";
     }
@@ -427,9 +431,49 @@ public class travelAgent
     }
 
 
+    private static String getYesNo()
+    {
+    	String input = "";
+    	while(!input.equals("y") && !input.equals("n"))
+    	{
+    		System.out.print("(y/n): ");
+    		input = user.next();
+    		System.out.print("\n");
+    	}
+    	return input;
+    }
+    
     //8: Serialize airport system into an AMS file.
     private static void saveAMS()
     {
-
+    	String ams = airSysMgr.getAMS();
+    	System.out.print("Please choose a name for your save file without extension: ");
+        File file = new File(user.next() + ".ams");
+        if (file.exists())
+        {
+            System.out.println("That file allready exists. Would you like to overwrite it?");
+        	if(getYesNo().equals("y"))
+        	{
+        		file.delete();
+        		writeToFile(file,ams);
+        		System.out.println("File Successfully Overwritten");
+        	}else
+        		System.out.println("File Not Saved!");
+        }else {
+        	writeToFile(file,ams);
+        	System.out.print("File Saved Successfully");
+        }
+    }
+    
+    private static void writeToFile(File f, String toWrite)
+    {
+    	try {
+	    	if(!f.exists())
+	    		f.createNewFile();
+	        BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+	        bw.write(toWrite);
+	        bw.close();
+	        
+    	}catch(IOException e) {}
     }
 }
