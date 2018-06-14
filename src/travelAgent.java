@@ -35,6 +35,17 @@ public class travelAgent
         System.out.println("=================Make a Selection=================");
     }
 
+    private static void subMenu()
+    {
+        System.out.println("===================Travel Agent===================");
+        System.out.println(" 1: Add a company.");
+        System.out.println(" 2: Add a hub.");
+        System.out.println(" 3: Add a trip.");
+        System.out.println(" 4: Add a section.");
+        System.out.println("-1: Return to previous menu.");
+        System.out.println("=================Make a Selection=================");
+    }
+
     public static void main(String[] args)
     {
         displayMenu();
@@ -230,6 +241,26 @@ public class travelAgent
         }
     }
 
+    private static void addCompany()
+    {
+
+    }
+
+    private static void addHub()
+    {
+
+    }
+
+    private static void addTrip()
+    {
+
+    }
+
+    private static void addSection()
+    {
+
+    }
+
 
     //1: Generate system using an AMS file.
     private static void loadAMS()
@@ -265,7 +296,31 @@ public class travelAgent
     //2: Generate system manually.
     private static void generateManually() //Make a second menu to manually perform sampleclient operations.
     {
-        //do stuff
+        subMenu();
+        int choice = intParam();
+        while (choice > 0)
+        {
+            switch (choice)
+            {
+                case 1:
+                    addCompany();
+                    break;
+                case 2:
+                    addHub();
+                    break;
+                case 3:
+                    addTrip();
+                    break;
+                case 4:
+                    addSection();
+                    break;
+                default:
+                    addCompany();
+            }
+            System.out.print("\n\n");
+            subMenu();
+            choice = intParam();
+        }
     }
 
 
