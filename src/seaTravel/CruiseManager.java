@@ -95,7 +95,7 @@ public class CruiseManager {
 
     }
     
-    public void findAvailableFlights(String orig, String dest, int...ints) //[Origin, Destination, Year, Month, Day]
+    public void findAvailableCruises(String orig, String dest, int...ints) //[Origin, Destination, Year, Month, Day]
     {
         int[] temp = new int[3];
         if (orig == null || dest == null || !cruiselines.containsKey((String) orig) || !seaports.containsKey((String) dest))
@@ -115,7 +115,7 @@ public class CruiseManager {
             temp = ints;
         }
 
-        System.out.printf("Flights from %s to %s\n", orig, dest);
+        System.out.printf("Cruises from %s to %s\n", orig, dest);
         boolean haveFlight = false;
         for (String airLiner : cruiselines.keySet())
         {
@@ -127,7 +127,7 @@ public class CruiseManager {
         }
         if (!haveFlight)
         {
-            System.out.println("\tNo Flights Found");
+            System.out.println("\tNo Cruises Found");
         }
     }
     
