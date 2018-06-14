@@ -13,7 +13,7 @@ public class PricingManager
 
     double getPricing(String orig, String dest, SeatClass seatClass)
     {
-        String tag = encodeFlight(orig, dest, seatClass);
+        String tag = encode(orig, dest, seatClass);
         if (pricing.containsKey(tag))
         {
             return pricing.get(tag);
@@ -29,11 +29,11 @@ public class PricingManager
             throw new IllegalArgumentException("Bad param passed to setPricing");
         }
 
-        String tag = encodeFlight(orig, dest, seatClass);
+        String tag = encode(orig, dest, seatClass);
         pricing.put(tag, price);
     }
 
-    private String encodeFlight(String orig, String dest, SeatClass seatClass)
+    private String encode(String orig, String dest, SeatClass seatClass)
     {
         return orig + "|" + dest + "|" + seatClass;
     }
