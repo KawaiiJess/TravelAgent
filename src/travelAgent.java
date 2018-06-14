@@ -261,7 +261,7 @@ public class travelAgent
         }
         else
         {
-            airSysMgr.findAvailableFlights(input.get(0), input.get(1), input.get(2), input.get(3), input.get(4));
+            airSysMgr.findAvailableFlights((String)input.get(0), (String)input.get(1), (int)input.get(2), (int)input.get(3), (int)input.get(4));
         }
     }
 

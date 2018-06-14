@@ -118,33 +118,31 @@ public class SystemManager
         }
     }
 
-    public void findAvailableFlights(Object... objects) //[Origin, Destination, Year, Month, Day]
+    public void findAvailableFlights(String orig, String dest, int...ints) //[Origin, Destination, Year, Month, Day]
     {
-        Object[] temp = new Object[5];
-        if (objects[0] == null || objects[1] == null || !airports.containsKey((String) objects[0]) || !airports.containsKey((String) objects[1]))
+        int[] temp = new int[3];
+        if (orig == null || dest == null || !airports.containsKey((String) orig) || !airports.containsKey((String) dest))
         {
             System.out.println("Unknown origin/dest");
             return;
         }
 
-        if (objects.length == 2)
+        if (ints.length > 0)
         {
-            temp[0] = objects[0];
-            temp[1] = objects[1];
-            temp[2] = 0;
-            temp[3] = 0;
-            temp[4] = 0;
+            temp[0] = ints[0];
+            temp[1] = ints[1];
+            temp[2] = ints[2];
         }
         else
         {
-            temp = objects;
+            temp = ints;
         }
 
-        System.out.printf("Flights from %s to %s\n", objects[0], objects[1]);
+        System.out.printf("Flights from %s to %s\n", orig, dest);
         boolean haveFlight = false;
         for (String airLiner : airlines.keySet())
         {
-            for (String flight : airlines.get(airLiner).getFlight((String) objects[0], (String) objects[1], (int) temp[2], (int) temp[3], (int) temp[4]))
+            for (String flight : airlines.get(airLiner).getFlight(orig, dest, (int) temp[0], (int) temp[1], (int) temp[2]))
             {
                 haveFlight = true;
                 System.out.println("\t" + flight);
