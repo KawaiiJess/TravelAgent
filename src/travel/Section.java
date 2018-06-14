@@ -62,11 +62,11 @@ public abstract class Section
     {
         for (int i = 0; i < cols.length; i++)
         {
-            for (int j = 0; j < seats[cols[i]].length; j++)
+            for (int j = 0; j < seats.length; j++)
             {
-                if (!seats[cols[i]][j].isOccupied())
+                if (!seats[j][cols[i]].isOccupied())
                 {
-                    seats[cols[i]][j].fill();
+                    seats[j][cols[i]].fill();
                     return true;
                 }
             }

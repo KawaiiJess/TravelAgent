@@ -168,35 +168,37 @@ public class travelAgent
         return temp.charAt(0);
     }
 
-    private static ArrayList<Object> getSeatInfo()
+    private static String getCompanyName()
     {
-        ArrayList<Object> seatInfo = new ArrayList<>();
         boolean airlineValid = false;
         while (!airlineValid)
         {
             System.out.println("Company?: ");
-            String airName = user.next();
+            String airName = user.next().toUpperCase();
             airlineValid = Company.validateName(airName);
             if (airlineValid)
             {
-                seatInfo.add(airName);
+                return airName;
             }
         }
+        return null;
+    }
 
+    private static String getFlightID()
+    {
         System.out.println("Flight ID?: ");
-        seatInfo.add(user.next());
+        return user.next();
+    }
 
-        SeatClass temp = null;
-        while (temp == null)
-        {
-            System.out.println("Class?: ");
-            String className = user.next().toLowerCase();
-            temp = SeatClass.getfromName(className);
-            if (temp != null)
-            {
-                seatInfo.add(temp);
-            }
-        }
+    private static ArrayList<Object> getSeatInfo()
+    {
+        ArrayList<Object> seatInfo = new ArrayList<>();
+
+        seatInfo.add(getCompanyName());
+
+        seatInfo.add(getFlightID());
+
+        seatInfo.add(getSeatClass());
 
         System.out.println("Row?: ");
         seatInfo.add(intParam());
@@ -205,6 +207,22 @@ public class travelAgent
         seatInfo.add(determineTravelType(user.next())); //Grab first char
 
         return seatInfo;
+    }
+
+    private static SeatClass getSeatClass()
+    {
+        SeatClass temp = null;
+        while (temp == null)
+        {
+            System.out.println("Class?: ");
+            String className = user.next().toLowerCase();
+            temp = SeatClass.getfromName(className);
+            if (temp != null)
+            {
+                return temp;
+            }
+        }
+        return null;
     }
 
 
@@ -288,10 +306,19 @@ public class travelAgent
         else
         {
             char pref = getSeatPreference();
-            if (pref != 'W' && pref != 'A')
+            if (pref == 'W' || pref == 'A')
             {
-                //boolean bookSeat(String fID, SeatClass seat, boolean windowSeat, boolean aisleSeat)
-
+                boolean window = false;
+                boolean aisle = false;
+                if (pref == 'W')
+                {
+                    window = true;
+                }
+                else
+                {
+                    aisle = true;
+                }
+                airSysMgr.bookSeat(getCompanyName(), getFlightID(), getSeatClass(), window, aisle);
             }
             else
             {

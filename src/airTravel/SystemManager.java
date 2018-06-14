@@ -133,10 +133,6 @@ public class SystemManager
             temp[1] = ints[1];
             temp[2] = ints[2];
         }
-        else
-        {
-            temp = ints;
-        }
 
         System.out.printf("Flights from %s to %s\n", orig, dest);
         boolean haveFlight = false;

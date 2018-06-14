@@ -99,7 +99,9 @@ public abstract class Trip
         for (Section s : sections)
         {
             s.display();
+            System.out.println("");
         }
+        System.out.println("");
     }
 
     public final String getSource()

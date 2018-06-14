@@ -41,6 +41,7 @@ class Airline extends Company
     {
         System.out.println("Airline: " + super.getName());
         super.display();
+        System.out.println("");
     }
 
     String[] getFlight(String orig, String dest)
