@@ -34,11 +34,4 @@ public class Flight extends Trip
         }
         return false;
     }
-
-    @Override
-    protected void display()
-    {
-        System.out.print("\tFlight =");
-        super.display();
-    }
 }

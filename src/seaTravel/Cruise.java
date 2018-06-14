@@ -35,11 +35,4 @@ public class Cruise extends Trip
         }
         return false;
     }
-
-    @Override
-    protected void display()
-    {
-        System.out.print("\tCruise =");
-        super.display();
-    }
 }
