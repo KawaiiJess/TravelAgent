@@ -5,12 +5,7 @@ import travel.Hub;
 import travel.SeatClass;
 import travel.Trip;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Scanner;
@@ -240,7 +235,7 @@ public class travelAgent
 
     private static SeatClass getSeatClass()
     {
-        SeatClass temp = null;
+        SeatClass temp;
         while (true)
         {
             System.out.println("Class?: ");
@@ -258,11 +253,11 @@ public class travelAgent
         char type = travelMethod().toUpperCase().charAt(0);
         if (type == 'C')
         {
-            //seaSysMgr.findAvailableCabins();
+            System.out.println("Unsupported operation.");
         }
         else if (type == 'T')
         {
-            //trainSysMgr.findAvailableTrains();
+            System.out.println("Unsupported operation.");
         }
         else
         {
@@ -297,11 +292,11 @@ public class travelAgent
             {
                 if (type == 'C')
                 {
-                    //seaSysMgr.findAvailableCabins();
+                    System.out.println("Unsupported operation.");
                 }
                 else if (type == 'T')
                 {
-                    //trainSysMgr.findAvailableTrains();
+                    System.out.println("Unsupported operation.");
                 }
                 else
                 {
@@ -359,11 +354,11 @@ public class travelAgent
         String dest = getHub();
         if (type == 'C')
         {
-            //seaSysMgr.findAvailableCabins();
+            System.out.println("Unsupported operation.");
         }
         else if (type == 'T')
         {
-            //trainSysMgr.findAvailableTrains();
+            System.out.println("Unsupported operation.");
         }
         else
         {
@@ -395,11 +390,11 @@ public class travelAgent
         char type = travelMethod().toUpperCase().charAt(0);
         if (type == 'C')
         {
-            //seaSysMgr.bookSeat();
+            System.out.println("Unsupported operation.");
         }
         else if (type == 'T')
         {
-            //trainSysMgr.bookSeat();
+            System.out.println("Unsupported operation.");
         }
         else
         {
@@ -498,16 +493,23 @@ public class travelAgent
         	System.out.print("File Saved Successfully");
         }
     }
-    
+
     private static void writeToFile(File f, String toWrite)
     {
-    	try {
-	    	if(!f.exists())
-	    		f.createNewFile();
-	        BufferedWriter bw = new BufferedWriter(new FileWriter(f));
-	        bw.write(toWrite);
-	        bw.close();
-	        
-    	}catch(IOException e) {}
+        try
+        {
+            if (!f.exists())
+            {
+                f.createNewFile();
+            }
+            BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+            bw.write(toWrite);
+            bw.close();
+
+        }
+        catch (IOException e)
+        {
+            System.out.println(e.getMessage());
+        }
     }
 }

@@ -5,13 +5,13 @@ public class Seat
     private String name;
     private boolean occupied;
 
-    public Seat(String name)
+    Seat(String name)
     {
         this.name = name;
         this.occupied = false;
     }
 
-    public Seat(int row, int col)
+    Seat(int row, int col)
     {
         this(convertName(row, col));
     }

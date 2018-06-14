@@ -29,11 +29,11 @@ public abstract class Section
 
     protected final boolean hasAvailableSeat()
     {
-        for (int i = 0; i < seats.length; i++)
+        for (Seat[] seat : seats)
         {
-            for (int j = 0; j < seats[i].length; j++)
+            for (Seat aSeat : seat)
             {
-                if (!seats[i][j].isOccupied())
+                if (!aSeat.isOccupied())
                 {
                     return true;
                 }
@@ -44,13 +44,13 @@ public abstract class Section
 
     protected final boolean bookSeat()
     {
-        for (int i = 0; i < seats.length; i++)
+        for (Seat[] seat : seats)
         {
-            for (int j = 0; j < seats[i].length; j++)
+            for (Seat aSeat : seat)
             {
-                if (!seats[i][j].isOccupied())
+                if (!aSeat.isOccupied())
                 {
-                    seats[i][j].fill();
+                    aSeat.fill();
                     return true;
                 }
             }
@@ -60,13 +60,13 @@ public abstract class Section
 
     protected boolean bookSeatByCols(int[] cols)
     {
-        for (int i = 0; i < cols.length; i++)
+        for (int col : cols)
         {
-            for (int j = 0; j < seats.length; j++)
+            for (Seat[] seat : seats)
             {
-                if (!seats[j][cols[i]].isOccupied())
+                if (!seat[col].isOccupied())
                 {
-                    seats[j][cols[i]].fill();
+                    seat[col].fill();
                     return true;
                 }
             }
@@ -104,11 +104,11 @@ public abstract class Section
     {
         boolean first = true;
         String returns = "";
-        for (int i = 0; i < seats.length; i++)
+        for (Seat[] seat : seats)
         {
-            for (int j = 0; j < seats[i].length; j++)
+            for (Seat aSeat : seat)
             {
-                if (seats[i][j].isOccupied())
+                if (aSeat.isOccupied())
                 {
                     if (first)
                     {
@@ -119,7 +119,7 @@ public abstract class Section
                         returns += ", ";
                     }
 
-                    returns += seats[i][j].getName();
+                    returns += aSeat.getName();
                 }
             }
         }
@@ -136,7 +136,7 @@ public abstract class Section
         return String.format("%c:%.2f:%c:%d", seatClassToChar(seatType), price, layoutCode, seats.length);
     }
 
-    public static final char seatClassToChar(SeatClass s)
+    private static char seatClassToChar(SeatClass s)
     {
         if (s == SeatClass.first)
         {

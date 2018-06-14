@@ -118,7 +118,6 @@ public abstract class Company
 
     protected final boolean addTrip(Trip t)
     {
-
         this.trips.add(t);
         return true;
     }
@@ -168,7 +167,7 @@ public abstract class Company
             this.pricingManager.setPricing(orig, dest, seatClass, price);
             return true;
         }
-        catch (IllegalArgumentException e)
+        catch (IllegalArgumentException ignored)
         {
         }
         return false;
