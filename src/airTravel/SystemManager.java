@@ -210,6 +210,25 @@ public class SystemManager
         }
     }
 
+    public void changePricing(String airline, String source, String dest, SeatClass sc, double newPrice)
+    {
+    	if(!airlines.containsKey(airline))
+    	{
+    		System.out.println("Unknown Airline");
+    		return;
+    	}
+    	if(!airports.containsKey(source) || !airports.containsKey(dest))
+    	{
+    		System.out.println("Unknown Airport");
+    		return;
+    	}
+    	
+    	if(airlines.get(airline).setPricing(source, dest, sc, newPrice))
+    		System.out.println("Price Change Successfull");
+    	else
+    		System.out.println("Failed to change price");	
+    }
+    
     public void displaySystemDetails()
     {
         for (String airLiner : airlines.keySet())

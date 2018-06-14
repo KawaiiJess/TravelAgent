@@ -36,7 +36,7 @@ public abstract class Company
         {
             for (Trip t : trips)
             {
-                t.display();
+                t.display(pricingManager);
             }
         }
     }

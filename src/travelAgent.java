@@ -376,11 +376,14 @@ public class travelAgent
         System.out.print("Destination?: ");
         String dest = getHub();
         SeatClass seatClass = getSeatClass();
+        System.out.print("New Price?: ");
+        double newPrice = doubleParam();
         
         char type = travelMethod().toUpperCase().charAt(0);
-        if(type == 'C');
-        if(type == 'A');
-        	//airSysMgr.
+        if(type == 'C')
+        	seaSysMgr.changePricing(airline, source, dest, seatClass, newPrice);
+        if(type == 'A')
+        	airSysMgr.changePricing(airline, source, dest, seatClass, newPrice);
     }
 
 
