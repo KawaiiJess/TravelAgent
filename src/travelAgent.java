@@ -170,18 +170,24 @@ public class travelAgent
 
     private static String getCompanyName()
     {
-        boolean airlineValid = false;
-        while (!airlineValid)
+        boolean nameValid = false;
+        while (true)
         {
             System.out.println("Company?: ");
-            String airName = user.next().toUpperCase();
-            airlineValid = Company.validateName(airName);
-            if (airlineValid)
+            String name = user.next().toUpperCase();
+            try
             {
-                return airName;
+                nameValid = Company.validateName(name);
+            }
+            catch (IllegalArgumentException e)
+            {
+                System.out.println(e.getMessage());
+            }
+            if (nameValid)
+            {
+                return name;
             }
         }
-        return null;
     }
 
     private static String getFlightID()
@@ -212,7 +218,7 @@ public class travelAgent
     private static SeatClass getSeatClass()
     {
         SeatClass temp = null;
-        while (temp == null)
+        while (true)
         {
             System.out.println("Class?: ");
             String className = user.next().toLowerCase();
@@ -222,7 +228,6 @@ public class travelAgent
                 return temp;
             }
         }
-        return null;
     }
 
 
@@ -349,13 +354,6 @@ public class travelAgent
 
 
     //7: Delete system.
-    private static void saveAMS()
-    {
-        System.out.println(" 7: Serialize airport system into an AMS file.");
-    }
-
-
-    //8: Serialize airport system into an AMS file.
     private static void deleteSystem()
     {
         char type = travelMethod().charAt(0);
@@ -371,5 +369,12 @@ public class travelAgent
         {
             airSysMgr = new SystemManager();
         }
+    }
+
+
+    //8: Serialize airport system into an AMS file.
+    private static void saveAMS()
+    {
+
     }
 }
