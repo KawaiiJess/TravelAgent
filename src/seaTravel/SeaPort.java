@@ -2,14 +2,14 @@ package seaTravel;
 
 import travel.Hub;
 
-public class SeaPort extends Hub 
+public class SeaPort extends Hub
 {
-	private String name;
+    private String name;
 
-	SeaPort(String name) throws IllegalArgumentException 
-	{
-		String nameUpper = name.toUpperCase();
-        
+    SeaPort(String name) throws IllegalArgumentException
+    {
+        String nameUpper = name.toUpperCase();
+
         char[] chars = nameUpper.toCharArray();
         for (char c : chars)
         {
@@ -19,8 +19,9 @@ public class SeaPort extends Hub
             }
         }
         this.name = nameUpper;
-	}
-	public String getName()
+    }
+
+    public String getName()
     {
         return this.name;
     }
@@ -29,9 +30,9 @@ public class SeaPort extends Hub
     {
         System.out.println("SeaPort: " + this.name);
     }
-    
+
     protected String getAMSmemento()
     {
-    	return this.name;
+        return this.name;
     }
 }

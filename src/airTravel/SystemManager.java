@@ -207,4 +207,48 @@ public class SystemManager
             this.airlines.put(a.getName(), a);
         }
     }
+
+    public String getAMS()
+    {
+        return String.format("[%s]{%s}", getAirportAMS(), getAirlineAMS());
+    }
+
+    private String getAirportAMS()
+    {
+        boolean first = true;
+        String returns = "";
+        for (Airport a : this.airports.values())
+        {
+            if (first)
+            {
+                first = false;
+            }
+            else
+            {
+                returns += ",";
+            }
+
+            returns += a.getAMSmemento();
+        }
+        return returns;
+    }
+
+    private String getAirlineAMS()
+    {
+        boolean first = true;
+        String returns = "";
+        for (Airline a : this.airlines.values())
+        {
+            if (!first)
+            {
+                returns += ",";
+            }
+            else
+            {
+                first = false;
+            }
+            returns += a.getAMSmemento();
+        }
+        return returns;
+    }
 }

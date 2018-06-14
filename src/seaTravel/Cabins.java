@@ -5,13 +5,13 @@ import travel.Section;
 
 public class Cabins extends Section
 {
-	Cabins(int numCabins) throws IllegalArgumentException
-	{
-		super(SeatClass.economy, numCabins,1,'N');
-	}
-	
-	boolean bookRoom(int roomNum)
-	{
-		return super.bookSeat(roomNum,0);
-	}
+    Cabins(int numCabins) throws IllegalArgumentException
+    {
+        super(SeatClass.economy, numCabins, 1, 'N');
+    }
+
+    boolean bookRoom(int roomNum)
+    {
+        return super.bookSeat(roomNum, 0);
+    }
 }

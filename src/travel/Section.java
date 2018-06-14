@@ -14,7 +14,7 @@ public abstract class Section
         }
 
         this.layoutCode = layoutCode;
-        
+
         seats = new Seat[numRows][];
         for (int i = 0; i < numRows; i++)
         {
@@ -98,19 +98,23 @@ public abstract class Section
     {
         return this.seatType;
     }
-    
+
     String getAMSmemento(double price)
     {
-    	return String.format("%c:%.2f:%c:%d", seatClassToChar(seatType),price,layoutCode,seats.length);
+        return String.format("%c:%.2f:%c:%d", seatClassToChar(seatType), price, layoutCode, seats.length);
     }
-    
+
     public static final char seatClassToChar(SeatClass s)
     {
-    	if(s==SeatClass.first)
-    		return 'F';
-    	if(s==SeatClass.business)
-    		return 'B';
+        if (s == SeatClass.first)
+        {
+            return 'F';
+        }
+        if (s == SeatClass.business)
+        {
+            return 'B';
+        }
 
-    	return 'E';
+        return 'E';
     }
 }

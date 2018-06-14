@@ -1,6 +1,7 @@
 import airTravel.AirportFactory;
 import airTravel.SystemManager;
-import travel.*;
+import travel.Hub;
+import travel.Trip;
 
 import java.io.BufferedReader;
 import java.io.File;

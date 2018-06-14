@@ -60,15 +60,15 @@ public abstract class Company
         }
         return castObjectToStringArray(selectedTrips.toArray());
     }
-    
+
     protected final String[] getTrips(String src, String dest, int year, int month, int day)
     {
-    	Calendar departure = new GregorianCalendar(year,month,day);
-    	Collection<String> selectedTrips = new ArrayList<>();
+        Calendar departure = new GregorianCalendar(year, month, day);
+        Collection<String> selectedTrips = new ArrayList<>();
         for (Trip t : this.trips)
         {
-        	Calendar c = t.getDeparture();
-            if (t.getSource().equals(src) && t.getDestination().equals(dest) && isSameDay(departure,c))
+            Calendar c = t.getDeparture();
+            if (t.getSource().equals(src) && t.getDestination().equals(dest) && isSameDay(departure, c))
             {
                 selectedTrips.add(t.getName());
             }
@@ -76,15 +76,18 @@ public abstract class Company
         return castObjectToStringArray(selectedTrips.toArray());
     }
 
-    private static boolean isSameDay(Calendar cal1, Calendar cal2) {
-        if (cal1 == null || cal2 == null) 
+    private static boolean isSameDay(Calendar cal1, Calendar cal2)
+    {
+        if (cal1 == null || cal2 == null)
+        {
             throw new IllegalArgumentException("The date must not be null");
-        
+        }
+
         return (cal1.get(Calendar.ERA) == cal2.get(Calendar.ERA)
                 && cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR) && cal1
                 .get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR));
     }
-    
+
     private String[] castObjectToStringArray(Object[] ara)
     {
         String[] s = new String[ara.length];
@@ -128,7 +131,7 @@ public abstract class Company
         }
         return null;
     }
-    
+
     public static String validateName(String name)
     {
         String nameUpper = name.toUpperCase();
@@ -149,38 +152,46 @@ public abstract class Company
             throw new IllegalArgumentException();
         }
     }
-    
+
     public final double getPricing(String orig, String dest, SeatClass seatClass)
     {
-    	return this.pricingManager.getPricing(orig, dest, seatClass);
+        return this.pricingManager.getPricing(orig, dest, seatClass);
     }
-    
+
     public final boolean setPricing(String orig, String dest, SeatClass seatClass, double price)
     {
-    	try {
-    		this.pricingManager.setPricing(orig, dest, seatClass, price);
-    		return true;
-    	}catch(IllegalArgumentException e) {}
-    	return false;
+        try
+        {
+            this.pricingManager.setPricing(orig, dest, seatClass, price);
+            return true;
+        }
+        catch (IllegalArgumentException e)
+        {
+        }
+        return false;
     }
-    
+
     public final String getAMSmemento()
     {
-    	return String.format("%s[%s]",this.name,getFlightAMS());
+        return String.format("%s[%s]", this.name, getFlightAMS());
     }
-    
-    private String getFlightAMS() 
+
+    private String getFlightAMS()
     {
-    	boolean first = true;
-    	String returns = "";
-    	for(Trip t: trips)
-    	{
-    		if(first)
-    			first = false;
-    		else
-    			returns += ",";
-    		returns += t.getAMSmemento(pricingManager);
-    	}
-    	return returns;
+        boolean first = true;
+        String returns = "";
+        for (Trip t : trips)
+        {
+            if (first)
+            {
+                first = false;
+            }
+            else
+            {
+                returns += ",";
+            }
+            returns += t.getAMSmemento(pricingManager);
+        }
+        return returns;
     }
 }

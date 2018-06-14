@@ -40,7 +40,7 @@ public class SampleClient
         SystemManager testManager = f.buildAirportSystem(test, 'A');
         System.out.println("First Read===================");
         testManager.displaySystemDetails();
-        SystemManager test2 = f.buildAirportSystem(testManager.getAMS(),'A');
+        SystemManager test2 = f.buildAirportSystem(testManager.getAMS(), 'A');
         System.out.println("Second Read===================");
         test2.displaySystemDetails();
 

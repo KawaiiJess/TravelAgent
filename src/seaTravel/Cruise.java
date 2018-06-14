@@ -5,18 +5,19 @@ import travel.Trip;
 public class Cruise extends Trip
 {
 
-	Cruise(String name, String source, String dest, int yr, int mnth, int day, int hr, int min) 
-	{
-		super(name, source, dest, yr, mnth, day, hr, min);
-	}
-	Cruise(String name, String source, String dest, int yr, int mnth, int day)
+    Cruise(String name, String source, String dest, int yr, int mnth, int day, int hr, int min)
+    {
+        super(name, source, dest, yr, mnth, day, hr, min);
+    }
+
+    Cruise(String name, String source, String dest, int yr, int mnth, int day)
     {
         this(name, source, dest, yr, mnth, day, 0, 0);
     }
-	
-	public boolean equals(Object o)
-	{
-		if (o == null)
+
+    public boolean equals(Object o)
+    {
+        if (o == null)
         {
             return false;
         }
@@ -26,16 +27,16 @@ public class Cruise extends Trip
         }
         if (o instanceof Cruise)
         {
-        	Cruise that = (Cruise) o;
+            Cruise that = (Cruise) o;
             return (that.getDeparture().equals(this.getDeparture()) &&
                     that.getName().equals(this.getName()) &&
                     that.getSource().equals(this.getSource()) &&
                     that.getDestination().equals(this.getDestination()));
         }
         return false;
-	}
-	
-	@Override
+    }
+
+    @Override
     protected void display()
     {
         System.out.print("\tCruise =");

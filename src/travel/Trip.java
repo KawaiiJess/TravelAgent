@@ -121,37 +121,41 @@ public abstract class Trip
     {
         return this.departure;
     }
-    
+
     String getAMSmemento(PricingManager pricing)
     {
-    	return String.format("%s|%s|%s|%s[%s]", this.name, getAMSdeparture(),this.source,this.getDestination(),getAMSsections(pricing));
+        return String.format("%s|%s|%s|%s[%s]", this.name, getAMSdeparture(), this.source, this.getDestination(), getAMSsections(pricing));
     }
-    
+
     private String getAMSdeparture()
     {
-    	return String.format("%d, %d, %d, %d, %d", 
-    			departure.get(Calendar.YEAR),
-    			departure.get(Calendar.MONTH),
-    			departure.get(Calendar.DAY_OF_MONTH),
-    			departure.get(Calendar.HOUR_OF_DAY),
-    			departure.get(Calendar.MINUTE));
+        return String.format("%d, %d, %d, %d, %d",
+                departure.get(Calendar.YEAR),
+                departure.get(Calendar.MONTH),
+                departure.get(Calendar.DAY_OF_MONTH),
+                departure.get(Calendar.HOUR_OF_DAY),
+                departure.get(Calendar.MINUTE));
     }
-    
+
     private String getAMSsections(PricingManager pricing)
     {
-    	String returns = "";
-    	boolean first = true;
-    	for(Section s: sections)
-    	{
-    		if(first)
-    			first = false;
-    		else
-    			returns +=", ";
-    		double price = pricing.getPricing(source, dest, s.getSeatClass());
-    		returns += s.getAMSmemento(price);
-    	}
-    	return returns;
-    	
+        String returns = "";
+        boolean first = true;
+        for (Section s : sections)
+        {
+            if (first)
+            {
+                first = false;
+            }
+            else
+            {
+                returns += ", ";
+            }
+            double price = pricing.getPricing(source, dest, s.getSeatClass());
+            returns += s.getAMSmemento(price);
+        }
+        return returns;
+
     }
 
     public abstract boolean equals(Object o);

@@ -7,7 +7,7 @@ public class FlightSection extends Section
 {
     FlightSection(SeatClass seatClass, int rows, int cols) throws IllegalArgumentException
     {
-        super(seatClass, rows, cols,'N');
+        super(seatClass, rows, cols, 'N');
         if (rows > 100 || cols > 10)
         {
             throw new IllegalArgumentException("to many rows or cols passed to new FlightSection");
