@@ -290,7 +290,8 @@ public class travelAgent
             char pref = getSeatPreference();
             if (pref != 'W' && pref != 'A')
             {
-                //Book using only airline & pref
+                //boolean bookSeat(String fID, SeatClass seat, boolean windowSeat, boolean aisleSeat)
+
             }
             else
             {

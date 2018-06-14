@@ -184,6 +184,38 @@ public class SystemManager
         }
     }
 
+    public void bookSeat(String air, String fl, SeatClass s, boolean window, boolean aisle)
+    {
+        if (airlines.containsKey(air))
+        {
+            Airline temp = airlines.get(air);
+            if (temp.bookSeat(fl, s, window, aisle))
+            {
+                if (window)
+                {
+                    System.out.println("Successfully booked a window seat on flight " + fl);
+                }
+                else if (aisle)
+                {
+                    System.out.println("Successfully booked an aisle seat on flight " + fl);
+                }
+                else
+                {
+                    System.out.println("Successfully booked a seat on flight " + fl);
+                }
+            }
+            else
+            {
+                System.out.println("Could not book seat!");
+            }
+
+        }
+        else
+        {
+            System.out.println("That airline doesn't exist!");
+        }
+    }
+
     public void displaySystemDetails()
     {
         for (String airLiner : airlines.keySet())
