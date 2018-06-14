@@ -365,7 +365,17 @@ public class travelAgent
     //4: Change seat price.
     private static void changePricing()
     {
-        System.out.println(" 4: Change seat price.");
+        String airline = getCompanyName();
+        System.out.print("Origin?: ");
+        String source = getHub();
+        System.out.print("Destination?: ");
+        String dest = getHub();
+        SeatClass seatClass = getSeatClass();
+        
+        char type = travelMethod().toUpperCase().charAt(0);
+        if(type == 'C');
+        if(type == 'A');
+        	//airSysMgr.
     }
 
 
