@@ -57,6 +57,22 @@ public abstract class Section
         }
         return false;
     }
+    
+    protected boolean bookSeatByCols(int[] cols)
+    {
+    	for(int i = 0; i < cols.length; i++)
+    	{
+    		for(int j = 0; j < seats[cols[i]].length;j++)
+    		{
+    			if(!seats[cols[i]][j].isOccupied())
+    			{
+    				seats[cols[i]][j].fill();
+    				return true;
+    			}
+    		}
+    	}
+    	return bookSeat();
+    }
 
     protected final boolean bookSeat(int row, int col)
     {
@@ -76,22 +92,31 @@ public abstract class Section
     protected final void display()
     {
         String seat = "\t\t" + seatType.toString();
+        String seats = getOccupiedSeats();
         System.out.printf("%-15s", seat);
-        System.out.print("[");
-        for (int i = 0; i < seats.length; i++)
+        if(!seats.isEmpty())System.out.printf("[%s]", seats);
+    }
+    
+    private String getOccupiedSeats() 
+    {
+    	boolean first = true;
+    	String returns = "";
+    	for (int i = 0; i < seats.length; i++)
         {
             for (int j = 0; j < seats[i].length; j++)
             {
-                if ((i == seats.length - 1) && (j == seats[i].length - 1))
-                {
-                    System.out.println(seats[i][j].getName() + "]");
-                }
-                else if (seats[i][j].isOccupied())
-                {
-                    System.out.print(seats[i][j].getName() + ", ");
-                }
+            	if(seats[i][j].isOccupied())
+            	{
+            		if(first)
+            			first = false;
+            		else
+            			returns += ", ";
+            		
+            		returns += seats[i][j].getName();
+            	}
             }
         }
+    	return returns;
     }
 
     protected final SeatClass getSeatClass()
