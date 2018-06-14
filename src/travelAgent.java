@@ -40,8 +40,8 @@ public class travelAgent
     private static void subMenu()
     {
         System.out.println("===================Travel Agent===================");
-        System.out.println(" 1: Add a company.");
-        System.out.println(" 2: Add a hub.");
+        System.out.println(" 1: Add a hub.");
+        System.out.println(" 2: Add a company.");
         System.out.println(" 3: Add a trip.");
         System.out.println(" 4: Add a section.");
         System.out.println("-1: Return to previous menu.");
@@ -100,6 +100,16 @@ public class travelAgent
         return user.nextInt();
     }
 
+    private static double doubleParam()
+    {
+        while (!user.hasNextDouble())
+        {
+            user.next();
+            System.out.println("Doubles only please.");
+        }
+        return user.nextDouble();
+    }
+
     private static String travelMethod()
     {
         System.out.println("Airplane 'A' or Cruise 'C'?");
@@ -137,7 +147,14 @@ public class travelAgent
         while (true)
         {
             String hub = user.next().toUpperCase();
-            isHubValid = Hub.validateName(hub);
+            try
+            {
+                isHubValid = Hub.validateName(hub);
+            }
+            catch (IllegalArgumentException e)
+            {
+                System.out.println(e.getMessage());
+            }
             if (isHubValid)
             {
                 return hub;
@@ -236,12 +253,24 @@ public class travelAgent
         }
     }
 
-    private static void addCompany()
+    private static void addHub()
     {
-
+        char type = travelMethod().toUpperCase().charAt(0);
+        if (type == 'C')
+        {
+            //seaSysMgr.findAvailableCabins();
+        }
+        else if (type == 'T')
+        {
+            //trainSysMgr.findAvailableTrains();
+        }
+        else
+        {
+            airSysMgr.createAirport(getHub());
+        }
     }
 
-    private static void addHub()
+    private static void addCompany()
     {
 
     }
@@ -298,10 +327,10 @@ public class travelAgent
             switch (choice)
             {
                 case 1:
-                    addCompany();
+                    addHub();
                     break;
                 case 2:
-                    addHub();
+                    addCompany();
                     break;
                 case 3:
                     addTrip();
