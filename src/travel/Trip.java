@@ -160,11 +160,15 @@ public abstract class Trip
 
     public Section getSectionBySeatClass(SeatClass seat)
     {
-    	for(Section s: sections)
-    		if(s.getSeatClass()==seat)
-    			return s;
-    	return null;
+        for (Section s : sections)
+        {
+            if (s.getSeatClass() == seat)
+            {
+                return s;
+            }
+        }
+        return null;
     }
-    
+
     public abstract boolean equals(Object o);
 }

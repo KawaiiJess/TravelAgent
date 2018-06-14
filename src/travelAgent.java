@@ -1,6 +1,8 @@
 import airTravel.AirportFactory;
 import airTravel.SystemManager;
+import travel.Company;
 import travel.Hub;
+import travel.SeatClass;
 import travel.Trip;
 
 import java.io.BufferedReader;
@@ -168,15 +170,25 @@ public class travelAgent
 
     private static void loadAMS()
     {
-        System.out.println(" 1: Generate airport system using AMS file.");
         try
         {
             String AMS = getFile();
             char type = determineTravelType(AMS);
             if (!AMS.equals(""))
             {
-                AirportFactory f = new AirportFactory();
-                airSysMgr = f.buildAirportSystem(AMS, type);
+                if (type == 'C')
+                {
+                    //seaSysMgr.findAvailableCabins();
+                }
+                else if (type == 'T')
+                {
+                    //trainSysMgr.findAvailableTrains();
+                }
+                else
+                {
+                    AirportFactory f = new AirportFactory();
+                    airSysMgr = f.buildAirportSystem(AMS, type);
+                }
             }
         }
         catch (Exception e)
@@ -185,7 +197,7 @@ public class travelAgent
         }
     }
 
-    private static void generateManually()
+    private static void generateManually() //Make a second menu to manually perform sampleclient operations.
     {
         System.out.println(" 2: Generate system manually.");
     }
@@ -213,50 +225,44 @@ public class travelAgent
         System.out.println(" 4: Change seat price.");
     }
 
-    private static ArrayList<Object> getSeatInfo()
+    //res.bookSeat("DELTA", "123", SeatClass.first, 1, 'A');
+    private static ArrayList<Object> getSeatInfo() //public void bookSeat(String air, String fl, SeatClass s, int row, char col)
     {
         ArrayList<Object> seatInfo = new ArrayList<>();
-//        boolean origValid = false;
-//        while (!origValid)
-//        {
-//            System.out.println("Company?: ");
-//            String orig = user.next();
-//            origValid = Company.validateName(orig);
-//            if (origValid)
-//            {
-//                query.add(orig);
-//            }
-//        }
-//
-//        boolean destValid = false;
-//        while (!destValid)
-//        {
-//            System.out.println("Destination?: ");
-//            String dest = user.next();
-//            destValid = Hub.validateName(dest);
-//            if (destValid)
-//            {
-//                query.add(dest);
-//            }
-//        }
-//
-//        Calendar dateValid = null;
-//        while (dateValid == null)
-//        {
-//            System.out.println("Date? [year, month, day]: ");
-//            int year = intParam();
-//            int month = intParam();
-//            int day = intParam();
-//            dateValid = Trip.validateDate(year, month, day, 0, 0);
-//            if (dateValid != null)
-//            {
-//                query.add(year);
-//                query.add(month);
-//                query.add(day);
-//            }
-//        }
-        return seatInfo;
+        boolean airlineValid = false;
+        while (!airlineValid)
+        {
+            System.out.println("Company?: ");
+            String airName = user.next();
+            airlineValid = Company.validateName(airName);
+            if (airlineValid)
+            {
+                seatInfo.add(airName);
+            }
+        }
 
+        System.out.println("Flight ID?: ");
+        seatInfo.add(user.next());
+
+        SeatClass temp = null;
+        while (temp == null)
+        {
+            System.out.println("Class?: ");
+            String className = user.next().toLowerCase();
+            temp = SeatClass.getfromName(className);
+            if (temp != null)
+            {
+                seatInfo.add(temp);
+            }
+        }
+
+        System.out.println("Row?: ");
+        seatInfo.add(intParam());
+
+        System.out.println("Column?: ");
+        seatInfo.add(determineTravelType(user.next())); //Grab first char
+
+        return seatInfo;
     }
 
     private static void bookSeat()
@@ -279,10 +285,9 @@ public class travelAgent
             }
             else
             {
-
+                ArrayList<Object> seatInfo = getSeatInfo();
+                airSysMgr.bookSeat((String) seatInfo.get(0), (String) seatInfo.get(1), (SeatClass) seatInfo.get(2), (int) seatInfo.get(3), (char) seatInfo.get(4));
             }
-            //airSysMgr.bookSeat();
-            //res.bookSeat("DELTA", "123", SeatClass.first, 1, 'A');
         }
     }
 

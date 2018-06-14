@@ -197,12 +197,16 @@ public abstract class Company
         }
         return returns;
     }
-    
+
     protected Trip getTripByName(String name)
     {
-    	for(Trip t : trips)
-    		if(t.getName().equals(name))
-    			return t;
-    	return null;
+        for (Trip t : trips)
+        {
+            if (t.getName().equals(name))
+            {
+                return t;
+            }
+        }
+        return null;
     }
 }

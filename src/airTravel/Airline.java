@@ -90,15 +90,17 @@ class Airline extends Company
             return super.bookSeat(fID, s, row, colInt);
         }
     }
-    
+
     //shhh, you don't see anything
     boolean bookSeat(String fID, SeatClass seat, boolean windowSeat, boolean aisleSeat)
     {
-    	Trip t = getTripByName(fID);
-    	if(t == null)
-    		return false;
-    	Section s = t.getSectionBySeatClass(seat);
-    	FlightSection section = (FlightSection)s;
-    	return section.bookSeat(windowSeat, aisleSeat);
+        Trip t = getTripByName(fID);
+        if (t == null)
+        {
+            return false;
+        }
+        Section s = t.getSectionBySeatClass(seat);
+        FlightSection section = (FlightSection) s;
+        return section.bookSeat(windowSeat, aisleSeat);
     }
 }

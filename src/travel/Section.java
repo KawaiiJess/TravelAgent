@@ -57,21 +57,21 @@ public abstract class Section
         }
         return false;
     }
-    
+
     protected boolean bookSeatByCols(int[] cols)
     {
-    	for(int i = 0; i < cols.length; i++)
-    	{
-    		for(int j = 0; j < seats[cols[i]].length;j++)
-    		{
-    			if(!seats[cols[i]][j].isOccupied())
-    			{
-    				seats[cols[i]][j].fill();
-    				return true;
-    			}
-    		}
-    	}
-    	return bookSeat();
+        for (int i = 0; i < cols.length; i++)
+        {
+            for (int j = 0; j < seats[cols[i]].length; j++)
+            {
+                if (!seats[cols[i]][j].isOccupied())
+                {
+                    seats[cols[i]][j].fill();
+                    return true;
+                }
+            }
+        }
+        return bookSeat();
     }
 
     protected final boolean bookSeat(int row, int col)
@@ -94,29 +94,36 @@ public abstract class Section
         String seat = "\t\t" + seatType.toString();
         String seats = getOccupiedSeats();
         System.out.printf("%-15s", seat);
-        if(!seats.isEmpty())System.out.printf("[%s]", seats);
+        if (!seats.isEmpty())
+        {
+            System.out.printf("[%s]", seats);
+        }
     }
-    
-    private String getOccupiedSeats() 
+
+    private String getOccupiedSeats()
     {
-    	boolean first = true;
-    	String returns = "";
-    	for (int i = 0; i < seats.length; i++)
+        boolean first = true;
+        String returns = "";
+        for (int i = 0; i < seats.length; i++)
         {
             for (int j = 0; j < seats[i].length; j++)
             {
-            	if(seats[i][j].isOccupied())
-            	{
-            		if(first)
-            			first = false;
-            		else
-            			returns += ", ";
-            		
-            		returns += seats[i][j].getName();
-            	}
+                if (seats[i][j].isOccupied())
+                {
+                    if (first)
+                    {
+                        first = false;
+                    }
+                    else
+                    {
+                        returns += ", ";
+                    }
+
+                    returns += seats[i][j].getName();
+                }
             }
         }
-    	return returns;
+        return returns;
     }
 
     protected final SeatClass getSeatClass()
