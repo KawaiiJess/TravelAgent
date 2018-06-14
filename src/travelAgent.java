@@ -456,7 +456,7 @@ public class travelAgent
         File file = new File(user.next() + ".ams");
         if (file.exists())
         {
-            System.out.println("That file allready exists. Would you like to overwrite it?");
+            System.out.println("That file already exists. Would you like to overwrite it?");
         	if(getYesNo().equals("y"))
         	{
         		file.delete();
