@@ -4,14 +4,17 @@ public abstract class Section
 {
     private Seat[][] seats;
     private SeatClass seatType;
+    private char layoutCode;
 
-    protected Section(SeatClass seatType, int numRows, int numCols)
+    protected Section(SeatClass seatType, int numRows, int numCols, char layoutCode)
     {
         if (seatType == null || numRows <= 0 || numCols <= 0)
         {
             throw new IllegalArgumentException("Bad name, class, numRows, or numCols passed to new Section()");
         }
 
+        this.layoutCode = layoutCode;
+        
         seats = new Seat[numRows][];
         for (int i = 0; i < numRows; i++)
         {
@@ -94,5 +97,20 @@ public abstract class Section
     protected final SeatClass getSeatClass()
     {
         return this.seatType;
+    }
+    
+    String getAMSmemento(double price)
+    {
+    	return String.format("%c:%.2f:%c:%d", seatClassToChar(seatType),price,layoutCode,seats.length);
+    }
+    
+    public static final char seatClassToChar(SeatClass s)
+    {
+    	if(s==SeatClass.first)
+    		return 'F';
+    	if(s==SeatClass.business)
+    		return 'B';
+
+    	return 'E';
     }
 }
