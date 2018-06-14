@@ -1,17 +1,17 @@
-package airTravel;
+package seaTravel;
 
 import travel.Hub;
 
-public class Airport extends Hub
+public class Seaport extends Hub
 {
-    Airport(String name) throws IllegalArgumentException
+    Seaport(String name) throws IllegalArgumentException
     {
         super(name);
     }
 
     public void display()
     {
-        System.out.println("Airport: " + super.getName());
+        System.out.println("Seaport: " + super.getName());
     }
 
     protected String getAMSmemento()

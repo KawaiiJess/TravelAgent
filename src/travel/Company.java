@@ -13,7 +13,10 @@ public abstract class Company
 
     protected Company(String name)
     {
-        this.name = validateName(name);
+        if (validateName(name))
+        {
+            this.name = name.toUpperCase();
+        }
         this.trips = new ArrayList<>();
         this.pricingManager = new PricingManager();
     }
@@ -132,7 +135,7 @@ public abstract class Company
         return null;
     }
 
-    public static String validateName(String name)
+    public static boolean validateName(String name) throws IllegalArgumentException
     {
         String nameUpper = name.toUpperCase();
         if (nameUpper.length() < 7 && nameUpper.length() > 0)
@@ -145,7 +148,7 @@ public abstract class Company
                     throw new IllegalArgumentException();
                 }
             }
-            return nameUpper;
+            return true;
         }
         else
         {

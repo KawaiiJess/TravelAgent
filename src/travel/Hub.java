@@ -2,6 +2,16 @@ package travel;
 
 public abstract class Hub
 {
+    private String name;
+
+    protected Hub(String name)
+    {
+        if (validateName(name))
+        {
+            this.name = name;
+        }
+    }
+
     public static boolean validateName(String name) throws IllegalArgumentException
     {
         String nameUpper = name.toUpperCase();
@@ -23,7 +33,10 @@ public abstract class Hub
         }
     }
 
-    public abstract String getName();
+    public final String getName()
+    {
+        return this.name;
+    }
 
     public abstract void display();
 
