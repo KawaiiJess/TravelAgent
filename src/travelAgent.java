@@ -131,6 +131,20 @@ public class travelAgent
         return AMS.toUpperCase().charAt(0);
     }
 
+    private static String getHub()
+    {
+        boolean isHubValid = false;
+        while (true)
+        {
+            String hub = user.next().toUpperCase();
+            isHubValid = Hub.validateName(hub);
+            if (isHubValid)
+            {
+                return hub;
+            }
+        }
+    }
+
     private static ArrayList<Object> getQueryInfo()
     {
         ArrayList<Object> query = new ArrayList<>();
