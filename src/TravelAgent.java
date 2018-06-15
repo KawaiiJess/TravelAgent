@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Scanner;
 
-public class travelAgent
+public class TravelAgent
 {
     private static Scanner user = new Scanner(System.in);
     private static SystemManager airSysMgr = new SystemManager();
