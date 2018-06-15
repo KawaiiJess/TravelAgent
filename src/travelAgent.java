@@ -1,5 +1,6 @@
 import airTravel.AirportFactory;
 import airTravel.SystemManager;
+import seaTravel.CruiseManager;
 import travel.Company;
 import travel.Hub;
 import travel.SeatClass;
@@ -14,8 +15,7 @@ public class travelAgent
 {
     private static Scanner user = new Scanner(System.in);
     private static SystemManager airSysMgr;
-    private static SystemManager seaSysMgr;
-    private static SystemManager trainSysMgr;
+    private static CruiseManager seaSysMgr;
 
     private static void displayMenu()
     {
@@ -107,7 +107,7 @@ public class travelAgent
 
     private static String travelMethod()
     {
-        System.out.println("Airplane 'A' or Cruise 'C'?");
+        System.out.print("Airplane 'A' or Cruise 'C'?: ");
         String temp = user.next().toUpperCase();
         while (!temp.equals("A") && !temp.equals("C"))
         {
@@ -136,11 +136,12 @@ public class travelAgent
         return AMS.toUpperCase().charAt(0);
     }
 
-    private static String getHub()
+    private static String getHubName()
     {
         boolean isHubValid = false;
         while (true)
         {
+            System.out.print("Name of the hub?: ");
             String hub = user.next().toUpperCase();
             try
             {
@@ -164,7 +165,7 @@ public class travelAgent
         Calendar dateValid = null;
         while (dateValid == null)
         {
-            System.out.println("Date? [year, month, day]: ");
+            System.out.print("Date? [year, month, day]: ");
             int year = intParam();
             int month = intParam();
             int day = intParam();
@@ -181,7 +182,7 @@ public class travelAgent
 
     private static char getSeatPreference()
     {
-        System.out.println("Do you have a seat preference (Window, Aisle, Neither)?: ");
+        System.out.print("Do you have a seat preference (Window, Aisle, Neither)?: ");
         String temp = user.next().toUpperCase();
         return temp.charAt(0);
     }
@@ -191,7 +192,7 @@ public class travelAgent
         boolean nameValid = false;
         while (true)
         {
-            System.out.println("Company?: ");
+            System.out.print("Company?: ");
             String name = user.next().toUpperCase();
             try
             {
@@ -208,9 +209,9 @@ public class travelAgent
         }
     }
 
-    private static String getFlightID()
+    private static String getTripID()
     {
-        System.out.println("Flight ID?: ");
+        System.out.print("Trip ID?: ");
         return user.next();
     }
 
@@ -220,14 +221,14 @@ public class travelAgent
 
         seatInfo.add(getCompanyName());
 
-        seatInfo.add(getFlightID());
+        seatInfo.add(getTripID());
 
         seatInfo.add(getSeatClass());
 
-        System.out.println("Row?: ");
+        System.out.print("Row?: ");
         seatInfo.add(intParam());
 
-        System.out.println("Column?: ");
+        System.out.print("Column?: ");
         seatInfo.add(determineTravelType(user.next())); //Grab first char
 
         return seatInfo;
@@ -238,7 +239,7 @@ public class travelAgent
         SeatClass temp;
         while (true)
         {
-            System.out.println("Class?: ");
+            System.out.print("Class?: ");
             String className = user.next().toLowerCase();
             temp = SeatClass.getfromName(className);
             if (temp != null)
@@ -253,31 +254,62 @@ public class travelAgent
         char type = travelMethod().toUpperCase().charAt(0);
         if (type == 'C')
         {
-            System.out.println("Unsupported operation.");
-        }
-        else if (type == 'T')
-        {
-            System.out.println("Unsupported operation.");
+            seaSysMgr.createSeaport(getHubName());
         }
         else
         {
-            airSysMgr.createAirport(getHub());
+            airSysMgr.createAirport(getHubName());
         }
     }
 
     private static void addCompany()
     {
-
+        char type = travelMethod().toUpperCase().charAt(0);
+        if (type == 'C')
+        {
+            seaSysMgr.createCruiseline(getCompanyName());
+        }
+        else
+        {
+            airSysMgr.createAirline(getCompanyName());
+        }
     }
 
     private static void addTrip()
     {
-
+        char type = travelMethod().toUpperCase().charAt(0);
+        int[] date = getDate();
+        System.out.print("Origin?: ");
+        String orig = getHubName();
+        System.out.print("Destination?: ");
+        String dest = getHubName();
+        if (type == 'C')
+        {
+            seaSysMgr.createCruise(getCompanyName(), orig, dest, date[0], date[1], date[2], getTripID());
+        }
+        else
+        {
+            airSysMgr.createFlight(getCompanyName(), orig, dest, date[0], date[1], date[2], getTripID());
+        }
     }
 
     private static void addSection()
     {
-
+        char type = travelMethod().toUpperCase().charAt(0);
+        System.out.print("How many cabins?: ");
+        int numCabins = intParam();
+        if (type == 'C')
+        {
+            seaSysMgr.createCabins(getCompanyName(), getTripID(), numCabins);
+        }
+        else
+        {
+            System.out.print("Rows?: ");
+            int rows = intParam();
+            System.out.print("Columns?: ");
+            int cols = intParam();
+            airSysMgr.createSection(getCompanyName(), getTripID(), rows, cols, getSeatClass());
+        }
     }
 
 
@@ -292,11 +324,7 @@ public class travelAgent
             {
                 if (type == 'C')
                 {
-                    System.out.println("Unsupported operation.");
-                }
-                else if (type == 'T')
-                {
-                    System.out.println("Unsupported operation.");
+                    throw new UnsupportedOperationException();
                 }
                 else
                 {
@@ -313,7 +341,7 @@ public class travelAgent
 
 
     //2: Generate system manually.
-    private static void generateManually() //Make a second menu to manually perform sampleclient operations.
+    private static void generateManually()
     {
         subMenu();
         int choice = intParam();
@@ -348,17 +376,13 @@ public class travelAgent
     {
         char type = travelMethod().charAt(0);
         int[] date = getDate();
-        System.out.println("Origin?: ");
-        String orig = getHub();
-        System.out.println("Destination?: ");
-        String dest = getHub();
+        System.out.print("Origin?: ");
+        String orig = getHubName();
+        System.out.print("Destination?: ");
+        String dest = getHubName();
         if (type == 'C')
         {
-            System.out.println("Unsupported operation.");
-        }
-        else if (type == 'T')
-        {
-            System.out.println("Unsupported operation.");
+            seaSysMgr.findAvailableCruises(orig, dest, date[0], date[1], date[2]);
         }
         else
         {
@@ -372,9 +396,9 @@ public class travelAgent
     {
         String airline = getCompanyName();
         System.out.print("Origin?: ");
-        String source = getHub();
+        String source = getHubName();
         System.out.print("Destination?: ");
-        String dest = getHub();
+        String dest = getHubName();
         SeatClass seatClass = getSeatClass();
         System.out.print("New Price?: ");
         double newPrice = doubleParam();
@@ -397,11 +421,9 @@ public class travelAgent
         char type = travelMethod().toUpperCase().charAt(0);
         if (type == 'C')
         {
-            System.out.println("Unsupported operation.");
-        }
-        else if (type == 'T')
-        {
-            System.out.println("Unsupported operation.");
+            System.out.print("Which cabin?: ");
+            int cabinNum = intParam();
+            seaSysMgr.bookCabin(getCompanyName(), getTripID(), cabinNum);
         }
         else
         {
@@ -418,7 +440,7 @@ public class travelAgent
                 {
                     aisle = true;
                 }
-                airSysMgr.bookSeat(getCompanyName(), getFlightID(), getSeatClass(), window, aisle);
+                airSysMgr.bookSeat(getCompanyName(), getTripID(), getSeatClass(), window, aisle);
             }
             else
             {
@@ -437,10 +459,6 @@ public class travelAgent
         {
             seaSysMgr.displaySystemDetails();
         }
-        else if (type == 'T')
-        {
-            trainSysMgr.displaySystemDetails();
-        }
         else
         {
             airSysMgr.displaySystemDetails();
@@ -454,11 +472,7 @@ public class travelAgent
         char type = travelMethod().charAt(0);
         if (type == 'C')
         {
-            seaSysMgr = new SystemManager();
-        }
-        else if (type == 'T')
-        {
-            trainSysMgr = new SystemManager();
+            seaSysMgr = new CruiseManager();
         }
         else
         {
@@ -487,7 +501,7 @@ public class travelAgent
         File file = new File(user.next() + ".ams");
         if (file.exists())
         {
-            System.out.println("That file already exists. Would you like to overwrite it?");
+            System.out.print("That file already exists. Would you like to overwrite it?: ");
             if (getYesNo().equals("y"))
             {
                 file.delete();

@@ -18,7 +18,7 @@ public class Seat
 
     private static String convertName(int row, int col)
     {
-        return (char) (col + 65) + "" + row;
+        return Integer.toString(row) + (char) (col + 65);
     }
 
     public void fill()

@@ -5,19 +5,11 @@ import travel.Section;
 
 public class AirportFactory
 {
-    public SystemManager buildAirportSystem(String config, char type)
+    public SystemManager buildAirportSystem(String config, char type) throws UnsupportedOperationException
     {
         if (type == 'C')
         {
             throw new UnsupportedOperationException();
-        }
-        else if (type == 'T')
-        {
-            throw new UnsupportedOperationException();
-        }
-        else
-        {
-            //do airline stuff
         }
 
         config = clean(config);
