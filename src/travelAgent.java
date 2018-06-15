@@ -14,8 +14,8 @@ import java.util.Scanner;
 public class travelAgent
 {
     private static Scanner user = new Scanner(System.in);
-    private static SystemManager airSysMgr;
-    private static CruiseManager seaSysMgr;
+    private static SystemManager airSysMgr = new SystemManager();
+    private static CruiseManager seaSysMgr = new CruiseManager();
 
     private static void displayMenu()
     {

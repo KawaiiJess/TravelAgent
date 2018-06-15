@@ -16,7 +16,7 @@ public class AirportFactory
 
 
         int start = 1;
-        int end = delemeterIndex(config, "]", start);
+        int end = delimiterIndex(config, "]", start);
         String[] airportNames = config.substring(start, end).split(",");
         Airport[] airports = new Airport[airportNames.length];
         for (int i = 0; i < airports.length; i++)
@@ -25,7 +25,7 @@ public class AirportFactory
         }
 
         start = end + 2;
-        end = delemeterIndex(config, "}", start);
+        end = delimiterIndex(config, "}", start);
         String[] airlineConfig = config.substring(start, end - 2).split("]],");
         Airline[] airLines = new Airline[airlineConfig.length];
         for (int i = 0; i < airLines.length; i++)
@@ -41,7 +41,7 @@ public class AirportFactory
 
     private Airline parseAirline(String s)
     {
-        int dataStart = delemeterIndex(s, "[", 0) + 1;
+        int dataStart = delimiterIndex(s, "[", 0) + 1;
         String name = s.substring(0, dataStart - 1);
 
         Airline al = new Airline(name);
@@ -60,13 +60,13 @@ public class AirportFactory
 
     private Flight parseFlight(String s, Airline al)
     {
-        int dataStart = delemeterIndex(s, "|", 0) + 1;
+        int dataStart = delimiterIndex(s, "|", 0) + 1;
         String name = s.substring(0, dataStart - 1);
         String[] data = s.substring(dataStart).split("\\|");
 
         String[] dates = data[0].split(",");
 
-        int sectionInfoDataStart = delemeterIndex(data[2], "[", 0);
+        int sectionInfoDataStart = delimiterIndex(data[2], "[", 0);
         String sectionInfo = data[2].substring(sectionInfoDataStart + 1);
         data[2] = data[2].substring(0, sectionInfoDataStart);
 
@@ -115,7 +115,7 @@ public class AirportFactory
         airline.setPricing(f.getSource(), f.getDestination(), seatClass, Double.parseDouble(data[1]));
     }
 
-    private int delemeterIndex(String search, String s, int start)
+    private int delimiterIndex(String search, String s, int start)
     {
         for (int i = start; i + s.length() <= search.length(); i++)
         {
