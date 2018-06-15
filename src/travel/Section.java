@@ -93,7 +93,7 @@ public abstract class Section
     {
         String seat = "\t\t" + seatType.toString();
         String seats = getOccupiedSeats();
-        System.out.printf("%-15s$%-10.2f", seat,price);
+        System.out.printf("%-15s$%-10.2f", seat, price);
         if (!seats.isEmpty())
         {
             System.out.printf("[%s]", seats);

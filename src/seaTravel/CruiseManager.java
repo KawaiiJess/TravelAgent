@@ -1,22 +1,23 @@
 package seaTravel;
 
-import java.util.HashMap;
-
 import travel.SeatClass;
 
-public class CruiseManager {
-	private HashMap<String, Seaport> seaports;
+import java.util.HashMap;
+
+public class CruiseManager
+{
+    private HashMap<String, Seaport> seaports;
     private HashMap<String, CruiseLine> cruiselines;
-    
+
     public CruiseManager()
     {
-    	seaports = new HashMap<>();
-    	cruiselines = new HashMap<>();
+        seaports = new HashMap<>();
+        cruiselines = new HashMap<>();
     }
-    
+
     public void createSeaport(String name)
     {
-    	try
+        try
         {
             if (!seaports.containsKey(name))
             {
@@ -33,14 +34,14 @@ public class CruiseManager {
             System.out.println("Seaport names must be exactly 3 alphanumeric characters!");
         }
     }
-    
+
     public void createCruiseline(String name)
     {
         try
         {
             if (!cruiselines.containsKey(name))
             {
-            	cruiselines.put(name, new CruiseLine(name));
+                cruiselines.put(name, new CruiseLine(name));
                 System.out.println("Added cruiseline " + name);
             }
             else
@@ -53,7 +54,7 @@ public class CruiseManager {
             System.out.println("Cruiseline names must inclusively be between 1 and 6 alphanumeric characters!");
         }
     }
-    
+
     public void createCruise(String cname, String orig, String dest, int year, int month, int day, String id)
     {
         if (cruiselines.containsKey(cname))
@@ -74,7 +75,7 @@ public class CruiseManager {
             System.out.println("That cruiseline doesn't exist!");
         }
     }
-    
+
     public void createCabins(String cname, String cID, int numCabins)
     {
         if (cruiselines.containsKey(cname))
@@ -96,30 +97,34 @@ public class CruiseManager {
         }
 
     }
-    
+
     public void changePricing(String cruiseline, String source, String dest, SeatClass sc, double newPrice)
     {
-    	if(!cruiselines.containsKey(cruiseline))
-    	{
-    		System.out.println("Unknown Airline");
-    		return;
-    	}
-    	if(!seaports.containsKey(source) || !seaports.containsKey(dest))
-    	{
-    		System.out.println("Unknown Airport");
-    		return;
-    	}
-    	
-    	if(cruiselines.get(cruiseline).setPricing(source, dest, sc, newPrice))
-    		System.out.println("Price Change Successfull");
-    	else
-    		System.out.println("Failed to change price");	
+        if (!cruiselines.containsKey(cruiseline))
+        {
+            System.out.println("Unknown Airline");
+            return;
+        }
+        if (!seaports.containsKey(source) || !seaports.containsKey(dest))
+        {
+            System.out.println("Unknown Airport");
+            return;
+        }
+
+        if (cruiselines.get(cruiseline).setPricing(source, dest, sc, newPrice))
+        {
+            System.out.println("Price Change Successfull");
+        }
+        else
+        {
+            System.out.println("Failed to change price");
+        }
     }
-    
-    public void findAvailableCruises(String orig, String dest, int...ints) //[Origin, Destination, Year, Month, Day]
+
+    public void findAvailableCruises(String orig, String dest, int... ints) //[Origin, Destination, Year, Month, Day]
     {
         int[] temp = new int[3];
-        if (orig == null || dest == null || !cruiselines.containsKey((String) orig) || !seaports.containsKey((String) dest))
+        if (orig == null || dest == null || !cruiselines.containsKey(orig) || !seaports.containsKey(dest))
         {
             System.out.println("Unknown origin/dest");
             return;
@@ -136,7 +141,7 @@ public class CruiseManager {
         boolean haveFlight = false;
         for (String airLiner : cruiselines.keySet())
         {
-            for (String flight : cruiselines.get(airLiner).getCruise(orig, dest, (int) temp[0], (int) temp[1], (int) temp[2]))
+            for (String flight : cruiselines.get(airLiner).getCruise(orig, dest, temp[0], temp[1], temp[2]))
             {
                 haveFlight = true;
                 System.out.println("\t" + flight);
@@ -147,7 +152,7 @@ public class CruiseManager {
             System.out.println("\tNo Cruises Found");
         }
     }
-    
+
     public void bookCabin(String cruiseline, String cruise, int roomNum)
     {
         if (cruiselines.containsKey(cruiseline))
@@ -168,13 +173,13 @@ public class CruiseManager {
             System.out.println("That cuiseline doesn't exist!");
         }
     }
-    
+
     public void displaySystemDetails()
     {
-    	for (String cruiseline : cruiselines.keySet())
+        for (String cruiseline : cruiselines.keySet())
         {
             cruiselines.get(cruiseline).display();
         }
     }
-    
+
 }

@@ -15,18 +15,18 @@ public class CruiseLine extends Company
 
     boolean addCabins(String cruise, int numCabins)
     {
-    	Section s;
-    	try
-    	{
-    		s = new Cabins(numCabins);
-    	}
-    	catch (IllegalArgumentException e)
-    	{
-    		return false;
-    	}
-    	return super.addSection(cruise, s);
+        Section s;
+        try
+        {
+            s = new Cabins(numCabins);
+        }
+        catch (IllegalArgumentException e)
+        {
+            return false;
+        }
+        return super.addSection(cruise, s);
     }
-    
+
     boolean addCruise(Trip t)
     {
         return super.addTrip(t);
@@ -65,7 +65,7 @@ public class CruiseLine extends Company
             super.addTrip(t);
             return true;
         }
-        catch (Exception e)
+        catch (Exception ignore)
         {
         }
         return false;

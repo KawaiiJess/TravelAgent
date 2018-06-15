@@ -378,12 +378,16 @@ public class travelAgent
         SeatClass seatClass = getSeatClass();
         System.out.print("New Price?: ");
         double newPrice = doubleParam();
-        
+
         char type = travelMethod().toUpperCase().charAt(0);
-        if(type == 'C')
-        	seaSysMgr.changePricing(airline, source, dest, seatClass, newPrice);
-        if(type == 'A')
-        	airSysMgr.changePricing(airline, source, dest, seatClass, newPrice);
+        if (type == 'C')
+        {
+            seaSysMgr.changePricing(airline, source, dest, seatClass, newPrice);
+        }
+        if (type == 'A')
+        {
+            airSysMgr.changePricing(airline, source, dest, seatClass, newPrice);
+        }
     }
 
 
@@ -465,35 +469,40 @@ public class travelAgent
 
     private static String getYesNo()
     {
-    	String input = "";
-    	while(!input.equals("y") && !input.equals("n"))
-    	{
-    		System.out.print("(y/n): ");
-    		input = user.next();
-    		System.out.print("\n");
-    	}
-    	return input;
+        String input = "";
+        while (!input.equals("y") && !input.equals("n"))
+        {
+            System.out.print("(y/n): ");
+            input = user.next();
+            System.out.print("\n");
+        }
+        return input;
     }
-    
+
     //8: Serialize airport system into an AMS file.
     private static void saveAMS()
     {
-    	String ams = airSysMgr.getAMS();
-    	System.out.print("Please choose a name for your save file without extension: ");
+        String ams = airSysMgr.getAMS();
+        System.out.print("Please choose a name for your save file without extension: ");
         File file = new File(user.next() + ".ams");
         if (file.exists())
         {
             System.out.println("That file already exists. Would you like to overwrite it?");
-        	if(getYesNo().equals("y"))
-        	{
-        		file.delete();
-        		writeToFile(file,ams);
-        		System.out.println("File Successfully Overwritten");
-        	}else
-        		System.out.println("File Not Saved!");
-        }else {
-        	writeToFile(file,ams);
-        	System.out.print("File Saved Successfully");
+            if (getYesNo().equals("y"))
+            {
+                file.delete();
+                writeToFile(file, ams);
+                System.out.println("File Successfully Overwritten");
+            }
+            else
+            {
+                System.out.println("File Not Saved!");
+            }
+        }
+        else
+        {
+            writeToFile(file, ams);
+            System.out.print("File Saved Successfully");
         }
     }
 

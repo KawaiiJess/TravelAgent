@@ -44,11 +44,7 @@ public abstract class Company
     protected boolean bookSeat(String trip, SeatClass seat, int row, int col)
     {
         Trip t = getTripFromName(trip);
-        if (t == null)
-        {
-            return false;
-        }
-        return t.bookSeat(seat, row, col);
+        return t != null && t.bookSeat(seat, row, col);
     }
 
     protected final String[] getTrips(String src, String dest)
@@ -109,11 +105,7 @@ public abstract class Company
             return false;
         }
         Trip t = getTripFromName(trip);
-        if (t == null)
-        {
-            return false;
-        }
-        return t.addSection(s);
+        return t != null && t.addSection(s);
     }
 
     protected final boolean addTrip(Trip t)

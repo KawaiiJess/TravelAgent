@@ -61,20 +61,16 @@ class Airline extends Company
             System.out.println("Null is not a valid flight ID!");
             return false;
         }
-        else
+        try
         {
-            try
-            {
-                Trip t = new Flight(name, source, dest, year, month, day);
-                super.addTrip(t);
-            }
-            catch (Exception e)
-            {
-                return false;
-            }
-
+            Trip t = new Flight(name, source, dest, year, month, day);
+            super.addTrip(t);
             return true;
         }
+        catch (Exception ignore)
+        {
+        }
+        return false;
     }
 
     boolean bookSeat(String fID, SeatClass s, int row, char col)

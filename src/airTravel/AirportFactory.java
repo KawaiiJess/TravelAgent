@@ -9,11 +9,11 @@ public class AirportFactory
     {
         if (type == 'C')
         {
-            //do cruise stuff
+            throw new UnsupportedOperationException();
         }
         else if (type == 'T')
         {
-            //do train stuff
+            throw new UnsupportedOperationException();
         }
         else
         {

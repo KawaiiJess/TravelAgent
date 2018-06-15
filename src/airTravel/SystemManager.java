@@ -118,10 +118,10 @@ public class SystemManager
         }
     }
 
-    public void findAvailableFlights(String orig, String dest, int...ints) //[Origin, Destination, Year, Month, Day]
+    public void findAvailableFlights(String orig, String dest, int... ints) //[Origin, Destination, Year, Month, Day]
     {
         int[] temp = new int[3];
-        if (orig == null || dest == null || !airports.containsKey((String) orig) || !airports.containsKey((String) dest))
+        if (orig == null || dest == null || !airports.containsKey(orig) || !airports.containsKey(dest))
         {
             System.out.println("Unknown origin/dest");
             return;
@@ -138,7 +138,7 @@ public class SystemManager
         boolean haveFlight = false;
         for (String airLiner : airlines.keySet())
         {
-            for (String flight : airlines.get(airLiner).getFlight(orig, dest, (int) temp[0], (int) temp[1], (int) temp[2]))
+            for (String flight : airlines.get(airLiner).getFlight(orig, dest, temp[0], temp[1], temp[2]))
             {
                 haveFlight = true;
                 System.out.println("\t" + flight);
@@ -212,23 +212,27 @@ public class SystemManager
 
     public void changePricing(String airline, String source, String dest, SeatClass sc, double newPrice)
     {
-    	if(!airlines.containsKey(airline))
-    	{
-    		System.out.println("Unknown Airline");
-    		return;
-    	}
-    	if(!airports.containsKey(source) || !airports.containsKey(dest))
-    	{
-    		System.out.println("Unknown Airport");
-    		return;
-    	}
-    	
-    	if(airlines.get(airline).setPricing(source, dest, sc, newPrice))
-    		System.out.println("Price Change Successfull");
-    	else
-    		System.out.println("Failed to change price");	
+        if (!airlines.containsKey(airline))
+        {
+            System.out.println("Unknown Airline");
+            return;
+        }
+        if (!airports.containsKey(source) || !airports.containsKey(dest))
+        {
+            System.out.println("Unknown Airport");
+            return;
+        }
+
+        if (airlines.get(airline).setPricing(source, dest, sc, newPrice))
+        {
+            System.out.println("Price Change Successfull");
+        }
+        else
+        {
+            System.out.println("Failed to change price");
+        }
     }
-    
+
     public void displaySystemDetails()
     {
         for (String airLiner : airlines.keySet())
