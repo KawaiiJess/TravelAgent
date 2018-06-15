@@ -71,22 +71,29 @@ public class SystemManager
 
     public void createFlight(String aname, String orig, String dest, int year, int month, int day, String id)
     {
-        if (airlines.containsKey(aname))
+        if (airports.containsKey(orig) && airports.containsKey(dest))
         {
-            Airline temp = airlines.get(aname);
-            if (temp.addFlight(id, orig, dest, year, month, day))
+            if (airlines.containsKey(aname))
             {
-                System.out.println("Added flight " + id + " to airline " + aname);
+                Airline temp = airlines.get(aname);
+                if (temp.addFlight(id, orig, dest, year, month, day))
+                {
+                    System.out.println("Added flight " + id + " to airline " + aname);
+                }
+                else
+                {
+                    System.out.println("Could not add flight!");
+                }
+
             }
             else
             {
-                System.out.println("Could not add flight!");
+                System.out.println("That airline doesn't exist!");
             }
-
         }
         else
         {
-            System.out.println("That airline doesn't exist!");
+            System.out.println("Invalid origin or destination.");
         }
     }
 
