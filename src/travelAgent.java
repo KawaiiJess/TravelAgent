@@ -304,11 +304,24 @@ public class travelAgent
         }
         else
         {
-            System.out.print("Rows?: ");
-            int rows = intParam();
-            System.out.print("Columns?: ");
-            int cols = intParam();
-            airSysMgr.createSection(getCompanyName(), getTripID(), rows, cols, getSeatClass());
+            System.out.println("Standard section or AMS section?: ");
+            char choice = travelMethod().toUpperCase().charAt(0);
+            if (choice == 'S')
+            {
+                System.out.print("Rows?: ");
+                int rows = intParam();
+                System.out.print("Columns?: ");
+                int cols = intParam();
+                airSysMgr.createSection(getCompanyName(), getTripID(), rows, cols, getSeatClass());
+            }
+            else
+            {
+                System.out.print("Rows?: ");
+                int rows = intParam();
+                System.out.print("S/M/W?: ");
+                char cols = travelMethod().toUpperCase().charAt(0);
+                airSysMgr.createSection(getCompanyName(), getTripID(), rows, cols, getSeatClass());
+            }
         }
     }
 

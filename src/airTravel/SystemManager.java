@@ -118,6 +118,34 @@ public class SystemManager
         }
     }
 
+    public void createSection(String air, String flID, int rows, char cols, SeatClass s)
+    {
+        if (s == null)
+        {
+            System.out.println("Null is not a valid seat class!");
+        }
+        else
+        {
+            if (airlines.containsKey(air))
+            {
+                Airline temp = airlines.get(air);
+                if (temp.createFlightSection(flID, s, rows, cols))
+                {
+                    System.out.println("Added section to flight " + flID);
+                }
+                else
+                {
+                    System.out.println("Could not add flight section!");
+                }
+
+            }
+            else
+            {
+                System.out.println("That airline doesn't exist!");
+            }
+        }
+    }
+
     public void findAvailableFlights(String orig, String dest, int... ints) //[Origin, Destination, Year, Month, Day]
     {
         int[] temp = new int[3];
