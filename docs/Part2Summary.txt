@@ -1,0 +1,22 @@
+PART 2
+
+[done] 1. Write a string parser using format shown.
+[done] https://cdn.discordapp.com/attachments/236342630554927107/455945557622652959/Screenshot_from_2018-06-11_21-04-42.png
+[done] 2. Use serialization to store airport subsystem in a file. Similar to displaySystemDetails. Must be in AMS format.
+[done] 3. Create overloaded createSection in SysMgr to handle layouts. See AMS format for details.
+	a. S = [1, ,2] - M = [1,2, ,3] - W = [1,2,3, ,4,5,6,7, ,8,9,10]
+	b. Don't allow booking of seats where there is an aisle.
+[done] 4. All flights between a particular orig/dest must have the same price for equivalent sections within the same airline.
+	a. All economy seats across all flights owned by Delta from Seattle to Denver are $300.
+[done] 5. Book a seat with only a seating preference using only class and preference. Economy + Window or Aisle. If no preferred seat is found, give next available seat in class.
+6. Write a GUI
+	[done] a. Take in an AMS file and create an airport system.
+	b. Seems redundant, but basically perform d, but only within a particular flight and then cascade the change across all flights with the same orig/dest.
+	[done] c. Query trips with open seats in a given class with orig/dest and a date.
+	    Should list all available trips and prices.
+	d. Change seat price across all trips between a particular orig/dest within a company.
+	[done] e. Book a seat given a specific trip. (Part 1)
+	[done] f. Book a seat given only seat class/preference.
+	[done] g. Display details of the current system.
+	[done] h. Serialize airport system into a file.
+	i. Manually create an entire airport system or cruise system.

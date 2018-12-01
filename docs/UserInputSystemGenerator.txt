@@ -1,0 +1,31 @@
+2 1 c USA 1 c JPN 1 c EUR
+2 c WACS 2 C JPCS 2 C EUCS
+3 c 2018 6 10 USA JPN WACS Boaty
+3 c 2018 7 10 JPN USA JPCS Subby
+3 c 2018 8 15 USA EUR WACS Shippy
+3 c 2018 9 15 EUR USA EUCS Dingey
+4 c 3 WACS Boaty
+4 c 2 JPCS Subby
+4 c 5 WACS Shippy
+4 c 4 EUCS Dingey
+
+-1
+
+4 WACS USA JPN Economy 249.99 c
+4 JPCS JPN USA Economy 199.95 c
+4 WACS USA EUR Economy 399.99 c
+4 EUCS EUR USA Economy 349.90 c
+
+5 c 0 WACS Boaty
+5 c 1 WACS Boaty
+5 c 2 WACS Boaty
+5 c 1 JPCS Subby
+5 c 4 WACS Shippy
+5 c 2 WACS Shippy
+5 c 0 WACS Shippy
+5 c 1 EUCS Dingey
+5 c 2 EUCS Dingey
+
+6
+c
+
